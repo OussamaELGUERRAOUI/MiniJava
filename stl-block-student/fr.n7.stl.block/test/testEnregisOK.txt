@@ -1,0 +1,8 @@
+block {
+
+    typedef struct Pointi { int x; int y; } Point;
+    typedef struct Segmenti { Point ext1; Point ext2; } Segment;
+    Segment s = {{0, 1}, {2, 3}};
+    
+
+}
