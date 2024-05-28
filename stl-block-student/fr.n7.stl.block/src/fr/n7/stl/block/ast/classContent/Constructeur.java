@@ -18,7 +18,7 @@ import fr.n7.stl.block.ast.instruction.declaration.ParameterDeclaration;
 import fr.n7.stl.util.Logger;
 
 
-public class Constructeur implements Declaration, Instruction{
+public class Constructeur implements ContentInterface {
 
     private String name;
     private List<ParameterDeclaration> parameters;

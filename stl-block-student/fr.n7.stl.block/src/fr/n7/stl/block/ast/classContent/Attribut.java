@@ -10,7 +10,7 @@ import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
 import fr.n7.stl.util.Logger;
 
-public class Attribut implements Declaration, Instruction {
+public class Attribut implements ContentInterface {
 
     private Visibility visibility;
     private State state; 

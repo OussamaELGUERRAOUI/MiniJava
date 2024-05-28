@@ -3,9 +3,14 @@
  */
 package fr.n7.stl.block.ast.scope;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import fr.n7.stl.block.ast.classContent.*;
+import fr.n7.stl.block.ast.classes.NormalClass;
+import fr.n7.stl.block.ast.instruction.declaration.FunctionDeclaration;
 
 /**
  * Implementation of a hierarchical scope using maps.
@@ -16,6 +21,10 @@ public class SymbolTable implements HierarchicalScope<Declaration> {
 	
 	private Map<String, Declaration> declarations;
 	private Scope<Declaration> context;
+	public static Methode methode = null;
+	public static NormalClass classe = null;
+	public static FunctionDeclaration fonction = null;
+	public static List<NormalClass> classes = new ArrayList<NormalClass>();
 
 	public SymbolTable() {
 		this( null );
