@@ -105,7 +105,7 @@ public class VariableDeclaration implements Declaration, Instruction {
 	public boolean collectAndBackwardResolve(HierarchicalScope<Declaration> _scope) {
 		if (_scope.accepts(this)) {
 			_scope.register(this);
-			return true;
+			return this.value.collectAndBackwardResolve(_scope);
 		} else {
 			return false;
 		}

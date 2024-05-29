@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
+import fr.n7.stl.util.Logger;
 
 /**
  * Implementation of the Abstract Syntax Tree node for a function type.
@@ -31,33 +32,26 @@ public class FunctionType implements Type {
 	 */
 	@Override
 	public boolean equalsTo(Type _other) {
+		boolean _res = true;
 		if (_other instanceof FunctionType) {
-			FunctionType _otherFunction = (FunctionType) _other;
-			if (!this.result.equalsTo(_otherFunction.result)) {
-				return false;
-			}
-			if (this.parameters.size() != _otherFunction.parameters.size()) {
-				return false;
-			}
-			// on vérifie que les paramètres sont les mêmes (l'order n'a pas d'importance)
-			for (Type param : this.parameters) {
-				boolean found = false;
-				for (Type otherParam : _otherFunction.parameters) {
-					if (param.equalsTo(otherParam)) {
-						found = true;
-						_otherFunction.parameters.remove(otherParam);
-						break;
+			if (((FunctionType) _other).result.equalsTo(this.result)) {
+				if (((FunctionType) _other).parameters.size() == this.parameters.size()) {
+					for (int i = 0; i < this.parameters.size(); i++) {
+						_res = _res && this.parameters.get(i).equalsTo(((FunctionType) _other).parameters.get(i));
 					}
+				} else {
+					_res = false;
+					Logger.error("FunctionType has not the same number of parameters.");
 				}
-
-				if (!found) {
-					return false;
-				}
+			} else {
+				_res = false;
+				Logger.error("FunctionType has not the same result type.");
 			}
-			return true;
 		} else {
-			return false;
+			_res = false;
+			Logger.error("FunctionType is not an instance of FunctionType.");
 		}
+		return _res;
 	}
 
 	/* (non-Javadoc)
@@ -66,33 +60,21 @@ public class FunctionType implements Type {
 	@Override
 	public boolean compatibleWith(Type _other) {
 		
-		if (_other instanceof FunctionType) {
-			FunctionType _otherFunction = (FunctionType) _other;
-			if (!this.result.compatibleWith(_otherFunction.result)) {
-				return false;
-			}
-			if (this.parameters.size() != _otherFunction.parameters.size()) {
-				return false;
-			}
-			// on vérifie que les paramètres sont les mêmes (l'order n'a pas d'importance)
-			for (Type param : this.parameters) {
-				boolean found = false;
-				for (Type otherParam : _otherFunction.parameters) {
-					if (param.compatibleWith(otherParam)) {
-						found = true;
-						_otherFunction.parameters.remove(otherParam);
-						break;
-					}
+		boolean _res = true;
+		if (((FunctionType) _other).result.compatibleWith(this.result)) {
+			if (((FunctionType) _other).parameters.size() == this.parameters.size()) {
+				for (int i = 0; i < this.parameters.size(); i++) {
+					_res = _res && this.parameters.get(i).compatibleWith(((FunctionType) _other).parameters.get(i));
 				}
-
-				if (!found) {
-					return false;
-				}
+			} else {
+				Logger.error("FunctionType has not the same number of parameters.");
+				_res = false;
 			}
-			return true;
 		} else {
-			return false;
+			Logger.error("FunctionType has not the same result type.");
+			_res = false;
 		}
+		return _res;
 	}
 
 	/* (non-Javadoc)
@@ -103,6 +85,7 @@ public class FunctionType implements Type {
 		if (_other instanceof FunctionType) {
 			return this;
 		} else {
+			Logger.error("FunctionType is not an instance of FunctionType.");
 			return AtomicType.ErrorType;
 		}
 	}
