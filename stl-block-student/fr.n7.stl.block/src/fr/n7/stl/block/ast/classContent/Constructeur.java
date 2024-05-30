@@ -20,6 +20,7 @@ import fr.n7.stl.util.Logger;
 
 public class Constructeur implements ContentInterface {
 
+    
     private String name;
     private List<ParameterDeclaration> parameters;
     private Block body;

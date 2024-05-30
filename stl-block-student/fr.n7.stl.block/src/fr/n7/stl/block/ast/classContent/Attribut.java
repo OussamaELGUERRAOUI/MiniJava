@@ -1,5 +1,7 @@
 package fr.n7.stl.block.ast.classContent;
 
+import java.beans.Visibility;
+
 import fr.n7.stl.block.ast.expression.Expression;
 import fr.n7.stl.block.ast.instruction.Instruction;
 import fr.n7.stl.block.ast.scope.Declaration;
@@ -12,7 +14,7 @@ import fr.n7.stl.util.Logger;
 
 public class Attribut implements ContentInterface {
 
-    private Visibility visibility;
+    private AccessRight visibility;
     private State state; 
     private String name;
     private Type type;
@@ -22,7 +24,7 @@ public class Attribut implements ContentInterface {
     private Register register;
 
 
-    public Attribut(Visibility _visibility, State _state, String _name, Type _type, Expression _value) {
+    public Attribut(AccessRight _visibility, State _state, Type _type, String _name, Expression _value) {
         this.visibility = _visibility;
         this.state = _state;
         this.name = _name;
@@ -30,7 +32,7 @@ public class Attribut implements ContentInterface {
         this.value = _value;
     }
 
-    public Attribut(Visibility _visibility, State _state, String _name, Type _type) {
+    public Attribut(AccessRight _visibility, State _state, Type _type, String _name) {
         this.visibility = _visibility;
         this.state = _state;
         this.name = _name;
