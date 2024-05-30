@@ -23,6 +23,7 @@ import fr.n7.stl.block.ast.scope.*;
 import fr.n7.stl.block.ast.type.*;
 import fr.n7.stl.block.ast.type.declaration.*;
 import fr.n7.stl.util.*;
+import fr.n7.stl.block.ast.classContent.*;
 import java_cup.runtime.ComplexSymbolFactory.Location;
 import java_cup.runtime.XMLElement;
 
@@ -842,7 +843,7 @@ class CUP$Parser$actions {
               Object RESULT =null;
 		//@@CUPDBG13
 
-          RESULT = AccessRight.Public
+          RESULT = AccessRight.Public;
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("AccessRight",28, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -854,7 +855,7 @@ class CUP$Parser$actions {
               Object RESULT =null;
 		//@@CUPDBG14
 
-          RESULT = AccessRight.Protected
+          RESULT = AccessRight.Protected;
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("AccessRight",28, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -866,7 +867,7 @@ class CUP$Parser$actions {
               Object RESULT =null;
 		//@@CUPDBG15
 
-          RESULT = AccessRight.Private
+          RESULT = AccessRight.Private;
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("AccessRight",28, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -1008,7 +1009,7 @@ class CUP$Parser$actions {
 		//@@CUPDBG23
 
 		
-		   RESULT = new Attribut(visibility, State.Fina, type, identifiant.getLeft(), valeur);
+		   RESULT = new Attribut(visibility, State.Final, type, identifiant.getLeft(), valeur);
 		
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Attribute",23, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
