@@ -24,6 +24,9 @@ import fr.n7.stl.block.ast.scope.*;
 import fr.n7.stl.block.ast.type.*;
 import fr.n7.stl.block.ast.type.declaration.*;
 import fr.n7.stl.util.*;
+import fr.n7.stl.block.ast.classContent.*;
+import fr.n7.stl.block.ast.classes.*;
+
 
 /* Variables partagées dans les actions de l'analyseur syntaxique. */
 parser code {:
@@ -208,15 +211,15 @@ ClassElements ::= /* Lambda */
 AccessRight ::=
 		UL_Public
 		{:
-          RESULT = AccessRight.Public
+          RESULT = AccessRight.Public;
 		:}
 		| UL_Protege
 		{:
-          RESULT = AccessRight.Protected
+          RESULT = AccessRight.Protected;
 		:}
 		| UL_Prive
 		{:
-          RESULT = AccessRight.Private
+          RESULT = AccessRight.Private;
 		:}
 		;
 		
