@@ -1,6 +1,6 @@
 package fr.n7.stl.block.ast.classContent;
 
-import java.beans.Visibility;
+import fr.n7.stl.block.ast.expression.*;
 
 import fr.n7.stl.block.ast.expression.Expression;
 import fr.n7.stl.block.ast.instruction.Instruction;

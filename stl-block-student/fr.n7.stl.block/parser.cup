@@ -174,9 +174,10 @@ Elements ::= Main
 		:}
 		;
 		
-Class ::= UL_Classe UL_Identificateur SingleInherits 
-		UL_Accolade_Ouvrante ClassElements UL_Accolade_Fermante
+Class ::= UL_Classe UL_Identificateur: name SingleInherits 
+		UL_Accolade_Ouvrante ClassElements: classElements UL_Accolade_Fermante
 		{:
+          RESULT = new ClassDeclaration(name, classElements);
 		:}
 		;
 		
