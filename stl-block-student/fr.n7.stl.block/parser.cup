@@ -13,6 +13,8 @@ import java.util.*;
 
 // Elements du métamodèle pour la construction de l'arbre abstrait
 import fr.n7.stl.block.ast.*;
+import fr.n7.stl.block.ast.classContent.*;
+import fr.n7.stl.block.ast.classes.*;
 import fr.n7.stl.block.ast.expression.*;
 import fr.n7.stl.block.ast.expression.accessible.*;
 import fr.n7.stl.block.ast.expression.allocation.*;
@@ -24,8 +26,6 @@ import fr.n7.stl.block.ast.scope.*;
 import fr.n7.stl.block.ast.type.*;
 import fr.n7.stl.block.ast.type.declaration.*;
 import fr.n7.stl.util.*;
-import fr.n7.stl.block.ast.classContent.*;
-import fr.n7.stl.block.ast.classes.*;
 
 
 /* Variables partagées dans les actions de l'analyseur syntaxique. */
@@ -100,6 +100,7 @@ non terminal Expression 				Expression;
 non terminal AssignableExpression		Affectable;
 /* miniJava */
 non terminal							Elements, Main, Class ;
+
 non terminal							SingleInherits ;
 non terminal Instance					Instance;
 non terminal							ClassElements ;
@@ -166,13 +167,24 @@ Program ::= /* retrait miniJava
 		;
 
 /* ajout miniJava : classes, attributs, méthodes, constructeurs, etc */
-Elements ::= Main
+Elements ::= Main : m Elements:elements 
 		{:
+          
+          elements.add(m);
+          RESULT = elements;
 		:}
-		| Class Elements
+		| Class:c  
+		   
 		{:
+           List<Element> elements = new LinkedList<>();
+           elements.add(c);
+		   RESULT = elements;
+          
 		:}
 		| UL_Abstrait Class Elements
+		{:
+		:}
+		| UL_Definitif Class Elements
 		{:
 		:}
 		;
@@ -180,7 +192,7 @@ Elements ::= Main
 Class ::= UL_Classe UL_Identificateur: name SingleInherits 
 		UL_Accolade_Ouvrante ClassElements: classElements UL_Accolade_Fermante
 		{:
-          RESULT = new ClassDeclaration(name, classElements);
+          RESULT = new NormalClass(name, classElements);
 		:}
 		;
 		
@@ -189,8 +201,11 @@ Main ::= UL_Public UL_Classe UL_Classe_Principale
 			UL_Public UL_De_Classe UL_Type_Vide UL_Methode_Principale 
 			UL_Parenthese_Ouvrante Parameters: parameters UL_Parenthese_Fermante Block: block UL_Accolade_Fermante
 		{:
+          RESULT = new Main(parameters, block);
 		:}
 		;
+		
+
 		
 SingleInherits ::= /* Lambda */
 		{:
@@ -201,13 +216,27 @@ SingleInherits ::= /* Lambda */
 		:}
 		;
 		
-ClassElements ::= /* Lambda */
+Instance ::= UL_Identificateur:nom
 		{:
-		:}
-		| AccessRight ClassElement ClassElements
-		{:
+			RESULT = new ObjectDecl(nom.getLeft());
 		:}
 		;
+		
+ClassElements ::= /* Lambda */
+		{:
+			List<ClassElement> classElements = new LinkedList<>();
+			RESULT = classElements;
+		:}
+		| ClassElement:element ClassElements:classElements
+		{:
+			classElements.add(element);
+			RESULT = classElements;
+		:}
+		;
+		
+
+		
+		
 AccessRight ::=
 		UL_Public
 		{:
@@ -240,7 +269,7 @@ ClassElement ::=
 		|
 		Method : methode
 		{:
-          RESULT = mathode ;
+          RESULT = methode ;
 		:}
 		|
 		Constructor : constructeur
@@ -255,66 +284,77 @@ Attribute ::=
 		AccessRight: visibility Type:type Identifiant:identifiant UL_Point_Virgule
 		{:
 
-		   RESULT = new Attribut(visibility, State.None,type ,identifiant.getLeft());
+		   RESULT = new Attribut(visibility, State.None,type ,identifiant);
            
 		:}
 		|
 		AccessRight: visibility  UL_De_Classe Type:type Identifiant:identifiant UL_Egal Expression:valeur UL_Point_Virgule
 		{:
 
-		   RESULT = new Attribut(visibility, State.Static, type ,identifiant.getLeft(), valeur);
+		   RESULT = new Attribut(visibility, State.Static, type ,identifiant, valeur);
 
 		:}
 		|
 		AccessRight: visibility  UL_De_Classe UL_Definitif Type:type Identifiant:identifiant UL_Egal Expression:valeur UL_Point_Virgule
 		{:
 		
-		   RESULT = new Attribut(visibility, State.Fina, type, identifiant.getLeft(), valeur);
+		   RESULT = new Attribut(visibility, State.StaticFinal, type, identifiant, valeur);
 		
 		:}
 
 		;
 		
 Method ::=
-		Signature:entete Block:corps
+		 AccessRight:visibility  Signature:entete Block:corps
 		{:
+          RESULT = new Methode(visibility, State.None, entete, corps); 
 		:}
 		| 
-		UL_Definitif Signature:entete Block:corps
+		AccessRight:visibility  UL_Definitif Signature:entete Block:corps
+		
 		{:
+          RESULT = new Methode(visibility, State.Final, entete, corps); 
 		:}
 		| 
-		UL_De_Classe Signature:entete Block:corps
+		AccessRight:visibility UL_De_Classe Signature:entete Block:corps
 		{:
+          RESULT = new Methode(visibility, State.Static, entete, corps); 
 		:}
 		| 
-		UL_De_Classe UL_Definitif Signature:entete Block:corps
+		AccessRight:visibility UL_De_Classe UL_Definitif Signature:entete Block:corps
+		 
 		{:
+          RESULT = new Methode(visibility, State.StaticFinal, entete, corps); 
 		:}
 		| 
-		UL_Abstrait Signature:entete UL_Point_Virgule
+		 AccessRight:visibility UL_Abstrait Signature:entete UL_Point_Virgule
 		{:
+         RESULT = new Methode(visibility, State.StaticFinal, entete); 
 		:}
 		;
 		
 Signature ::=
 		Type:type Identifiant:identifiant UL_Parenthese_Ouvrante Parameters:parametres UL_Parenthese_Fermante
 		{:
+          RESULT = new Signature(identifiant, type, parameters);
 		:}
 		|
 		Type:type Identifiant:identifiant UL_Parenthese_Ouvrante UL_Parenthese_Fermante
 		{:
+          RESULT = new Signature(identifiant, type);
 		:}
 		;
 		
 Constructor ::=
-		UL_Identificateur:nom UL_Parenthese_Ouvrante Parameters:parametres UL_Parenthese_Fermante Block
+		UL_Identificateur:nom UL_Parenthese_Ouvrante Parameters:parametres UL_Parenthese_Fermante Block : body
 		{:
-		:}
+         public Constructeur(name,parameters, body)
+		:}/*
 		|
-		UL_Identificateur:nom UL_Parenthese_Ouvrante UL_Parenthese_Fermante Block
+		UL_Identificateur:nom UL_Parenthese_Ouvrante UL_Parenthese_Fermante Block:body
 		{:
-		:}
+         public Constructeur(name, body)
+		:}*/
 		;
 
 /* fin ajout miniJava */
