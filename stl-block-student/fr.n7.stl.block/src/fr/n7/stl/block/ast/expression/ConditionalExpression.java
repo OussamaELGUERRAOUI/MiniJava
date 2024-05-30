@@ -106,6 +106,15 @@ public class ConditionalExpression implements Expression {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException("Semantics getCode is not implemented in ConditionalExpression.");
+		Fragment res = _factory.createFragment();
+		int index = _factory.createLabelNumber();
+		res.append(this.condition.getCode(_factory));
+		res.add(_factory.createJumpIf("ElseExpression " + index, 0));
+		res.append(this.thenExpression.getCode(_factory));
+		res.add(_factory.createJump("EndExpression " + index));
+		res.addSuffix("ElseExpression");
+		res.append(this.elseExpression.getCode(_factory));
+		res.addSuffix("EndExpression " + index);
+		return res;
 	}
 }

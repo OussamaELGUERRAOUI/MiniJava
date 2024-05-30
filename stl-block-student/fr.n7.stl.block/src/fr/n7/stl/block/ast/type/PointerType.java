@@ -41,7 +41,11 @@ public class PointerType implements Type {
 	 */
 	@Override
 	public boolean compatibleWith(Type _other) {
-		return this.element.compatibleWith(_other);
+		if (_other instanceof PointerType) {
+			return this.element.compatibleWith(((PointerType) _other).getPointedType());
+		} else {
+			return false;
+		}
 	}
 
 	/* (non-Javadoc)
@@ -49,11 +53,13 @@ public class PointerType implements Type {
 	 */
 	@Override
 	public Type merge(Type _other) {
+		Type res;
 		if (_other instanceof PointerType) {
-			return new PointerType(this.element.merge(((PointerType) _other).element));
+			res = new PointerType(this.element.merge(((PointerType) _other).element));
 		} else {
-			return AtomicType.ErrorType;
+			res = AtomicType.ErrorType;
 		}
+		return res;
 	}
 
 	/* (non-Javadoc)

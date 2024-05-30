@@ -7,6 +7,7 @@ import java.util.List;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.block.ast.type.declaration.LabelDeclaration;
+import fr.n7.stl.util.Logger;
 
 /**
  * @author Marc Pantel
@@ -47,21 +48,26 @@ public class EnumerationType implements Type, Declaration {
 	 */
 	@Override
 	public boolean equalsTo(Type _other) {
+		boolean _res = true;
 		if (_other instanceof EnumerationType) {
-			EnumerationType _inter = (EnumerationType) _other;
-			if (this.labels.size() != _inter.labels.size()) {
-				return false;
-			} else {
-				for (int i=0; i < this.labels.size(); i++) {
-					if (!nameAndTypeEqual(this.labels.get(i), _inter.labels.get(i))) {
-						return false;
+			EnumerationType loc = (EnumerationType) _other;
+			if (this.getName().equals(loc.getName()) && this.labels.size() == loc.labels.size()) {
+				for (int i = 0; i < this.labels.size(); i++) {
+					if (!this.labels.get(i).getName().equals(loc.labels.get(i).getName()) || !this.labels.get(i).getType().equals(loc.labels.get(i).getType())) {
+						_res = false;
+						Logger.error("EnumerationType has not the same labels.");
+						break;
 					}
 				}
-				return true;
+			} else {
+				_res = false;
+				Logger.error("EnumerationType has not the same name or number of labels.");
 			}
 		} else {
-			return false;
+			_res = false;
+			Logger.error("EnumerationType is not an instance of EnumerationType.");
 		}
+		return _res;
 	}
 
 	/* (non-Javadoc)
