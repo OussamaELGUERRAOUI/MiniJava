@@ -715,6 +715,9 @@ class CUP$Parser$actions {
 					System.out.println(elements.get(i));
 				}
 
+				  /*********************************************************/
+				 /*************************** TDS *************************/
+				/*********************************************************/
 				/* Récupérer les symbole */
 				SymbolTable tds = new SymbolTable();
 				for(int i = elements.size() - 1; i >= 0 ; i--) {
@@ -729,38 +732,46 @@ class CUP$Parser$actions {
 						break;
 					}
 				}
-
-				/* Vérifier les types des éléments*/
-				for(int i = elements.size() - 1; i >= 0 ; i--) {
-					if (elements.get(i).checkType()) {
-						
-						elements.get(i).allocateMemory(Register.SB, 0);
-						Fragment code = elements.get(i).getCode(new TAMFactoryImpl());
-						list.add(code);
-					} else {
-						checkType = false;
-						break;
-					}
-				}
-
 				/* Vérifier la collecte */
 				if (checkCollect) {
-					System.out.println("\nCollect succeeded :" /* + tds */ );
+					System.out.println("\nCollect succeeded !" /* + tds */ );
 				} else {
 					System.out.println("\nCollect failed !");
 				}
 
 				/* Vérifier le resolve */
 				if (checkResolve) {
-					System.out.println("Resolve succeeded :");
+					System.out.println("Resolve succeeded !");
 				} else {
 					System.out.println("Resolve failed !");
 				}
-
+				
+				  /**********************************************************/
+				 /*************************** TYPE *************************/
+				/**********************************************************/
+				for(int i = elements.size() - 1; i >= 0 ; i--) {
+					if (!elements.get(i).checkType()) {
+						checkType = false;
+						break;
+					}
+				}
 				if (checkType) {
-					System.out.println("Check type succeeded\n");
+					System.out.println("Check type succeeded !\n");
 				} else {
-					System.out.println("Check type failed\n");
+					System.out.println("Check type failed !\n");
+				}
+
+				  /**********************************************************/
+				 /*************************** TAM **************************/
+				/**********************************************************/
+				for(int i = elements.size() - 1; i >= 0 ; i--) {
+					if (elements.get(i).checkType()) {
+						elements.get(i).allocateMemory(Register.SB, 0);
+						Fragment code = elements.get(i).getCode(new TAMFactoryImpl());
+						list.add(code);
+					} else {
+						break;
+					}
 				}
 
 				for(int i = list.size() - 1; i >= 0 ; i--) {

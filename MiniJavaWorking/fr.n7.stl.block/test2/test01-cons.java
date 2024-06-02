@@ -32,7 +32,7 @@ public class Main {
 	public static void main(String args[]) {
 		A a1 = new A();
         A a2 = new A( 5 );
-        //A.afficher(); ne marche pas
+        // A.afficher(); marche pas
         //print A.a;
 	}
 }

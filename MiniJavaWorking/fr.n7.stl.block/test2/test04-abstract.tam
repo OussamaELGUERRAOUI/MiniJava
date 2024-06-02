@@ -1,0 +1,8 @@
+begin:A
+LOADL 1
+SUBR IOut
+LOADL 10
+SUBR COut
+end:A
+RETURN (0) 0
+

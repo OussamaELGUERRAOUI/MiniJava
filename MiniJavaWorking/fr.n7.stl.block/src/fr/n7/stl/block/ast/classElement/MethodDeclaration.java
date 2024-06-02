@@ -77,7 +77,9 @@ public class MethodDeclaration implements ClassElement, Declaration {
                 }
             }
             this.parametersTable = tableParametres;
-            result = this.corps.collect(tableParametres);
+            if (this.corps != null) {
+            	result = this.corps.collect(tableParametres);
+            } else {result = true;}
             return result;
         } else {
             Logger.error("The method identifier " + id + " is already defined.");
@@ -88,7 +90,9 @@ public class MethodDeclaration implements ClassElement, Declaration {
     @Override
     public boolean fullResolve(HierarchicalScope<Declaration> _scope) {
         SymbolTable.methodDeclaration = this;
-        return this.corps.resolve(this.parametersTable);
+        if (this.corps != null) {
+        	return this.corps.resolve(this.parametersTable);
+        } else {return true;}
     }
 
     @Override
@@ -103,7 +107,9 @@ public class MethodDeclaration implements ClassElement, Declaration {
                 }
             }
         }
-		_result = _result && corps.checkType();
+        if (this.corps != null) {
+        	_result = _result && corps.checkType();
+        }
         return _result;
     }
 
@@ -113,19 +119,23 @@ public class MethodDeclaration implements ClassElement, Declaration {
 		for (ParameterDeclaration p : this.signature.getParameters()) {
 			offset += p.getType().length();
 		}
-		this.corps.allocateMemory(Register.LB, this.offset);
+		if (this.corps != null) {
+			this.corps.allocateMemory(Register.LB, this.offset);
+		}
 		return 0;
     }
 
     @Override
     public Fragment getCode(TAMFactory _factory) {
         Fragment _result = _factory.createFragment();
-        _result.append(this.corps.getCode(_factory));
-		_result.addPrefix("begin:" + this.signature.getName());
-        if (this.signature.getType() == AtomicType.VoidType){
-			_result.add(_factory.createReturn(0, this.offset));
-		}
-		_result.addSuffix("end:" + this.signature.getName());
+        if (this.corps != null) {
+        	_result.append(this.corps.getCode(_factory));
+        	_result.addPrefix("begin:" + this.signature.getName());
+        	if (this.signature.getType() == AtomicType.VoidType){
+        		_result.add(_factory.createReturn(0, this.offset));
+        	}
+        	_result.addSuffix("end:" + this.signature.getName());
+        }
         return _result;
     }
 

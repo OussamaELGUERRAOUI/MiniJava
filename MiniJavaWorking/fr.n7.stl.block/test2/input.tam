@@ -28,6 +28,15 @@ SUBR INeg
 STORE (1) 0[HT]
 end:A
 RETURN (0) 0
+begin:getV
+POP (0) 0
+POP (1) 0
+end:getV
+begin:setVint
+LOAD (1) -1[LB]
+STORE (1) 0[HT]
+RETURN (0) 0
+end:setVint
 begin:v
 PUSH 1
 end:v
