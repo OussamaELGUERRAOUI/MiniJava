@@ -688,6 +688,10 @@ class CUP$Parser$actions {
 				for(int i = elements.size()-1; i>=0; i--) {
                     check_collect = check_collect && elements.get(i).collect(tds);
                     check_resolve = check_resolve && elements.get(i).resolve(tds);
+
+                    if (!check_collect || !check_resolve){
+                       break;
+                   }
                     
 				}
 				for(int i = elements.size()-1; i >= 0 ; i--) {
