@@ -1,0 +1,25 @@
+BEGIN:MAIN
+LOADL 1
+SUBR IOut
+LOADL 10
+SUBR COut
+end:A
+end:get
+HALT
+END:MAIN
+begin:get
+LOADL 1
+SUBR IOut
+LOADL 10
+SUBR COut
+end:A
+end:get
+begin:A
+LOADL 1
+SUBR IOut
+LOADL 10
+SUBR COut
+end:A
+end:get
+RETURN (0) 0
+

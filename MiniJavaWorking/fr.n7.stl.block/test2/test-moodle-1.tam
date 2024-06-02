@@ -1,0 +1,95 @@
+BEGIN:MAIN
+PUSH 1
+LOADL 1
+SUBR MAlloc
+CALL (SB) begin:A
+STORE (1) 0[SB]
+PUSH 1
+LOADL 1
+SUBR MAlloc
+LOADL 5
+CALL (SB) begin:Aint
+STORE (1) 1[SB]
+LOAD (1) 1[HT]
+SUBR IOut
+LOADL 10
+SUBR COut
+end:A
+SUBR IOut
+LOADL 10
+SUBR COut
+end:A
+LOAD (1) 1[HT]
+SUBR IOut
+LOADL 10
+SUBR COut
+end:A
+SUBR IOut
+LOADL 10
+SUBR COut
+end:A
+LOAD (1) 1[SB]
+POP (0) 0
+POP (1) 0
+STORE (1) 0[SB]
+LOADL 1
+SUBR IAdd
+STOREI (1)
+LOAD (1) 1[HT]
+SUBR IOut
+LOADL 10
+SUBR COut
+end:A
+LOADL 3
+CALL (SB) begin:setVint
+SUBR IOut
+LOADL 10
+SUBR COut
+end:A
+LOADL 7
+CALL (SB) begin:setVint
+SUBR IOut
+LOADL 10
+SUBR COut
+end:A
+LOAD (1) 1[SB]
+STORE (1) 0[SB]
+LOADL 9
+CALL (SB) begin:setVint
+SUBR IOut
+LOADL 10
+SUBR COut
+end:A
+LOADL 11
+CALL (SB) begin:setVint
+SUBR IOut
+LOADL 10
+SUBR COut
+end:A
+HALT
+END:MAIN
+begin:Aint
+LOAD (1) -1[LB]
+STORE (1) 0[HT]
+end:Aint
+RETURN (0) 0
+begin:A
+LOADL 1
+SUBR IOut
+LOADL 10
+SUBR COut
+end:A
+RETURN (0) 0
+begin:getV
+POP (0) 0
+POP (1) 0
+end:getV
+begin:setVint
+LOAD (1) -1[LB]
+STORE (1) 0[HT]
+RETURN (0) 0
+end:setVint
+begin:v
+PUSH 1
+end:v
+
