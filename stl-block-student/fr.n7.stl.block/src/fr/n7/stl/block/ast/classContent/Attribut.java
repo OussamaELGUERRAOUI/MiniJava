@@ -6,17 +6,19 @@ import fr.n7.stl.block.ast.expression.Expression;
 import fr.n7.stl.block.ast.instruction.Instruction;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
+import fr.n7.stl.block.ast.type.PartialType;
 import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
 import fr.n7.stl.util.Logger;
+import fr.n7.stl.util.Pair;
 
 public class Attribut implements ContentInterface {
 
     private AccessRight visibility;
     private State state; 
-    private String name;
+    private Pair<String, PartialType> identifiant;
     private Type type;
     private Expression value;
 
@@ -24,26 +26,26 @@ public class Attribut implements ContentInterface {
     private Register register;
 
 
-    public Attribut(AccessRight _visibility, State _state, Type _type, String _name, Expression _value) {
+    public Attribut(AccessRight _visibility, State _state, Type _type, Pair<String, PartialType> _identifiant, Expression _value) {
         this.visibility = _visibility;
         this.state = _state;
-        this.name = _name;
+        this.identifiant = _identifiant;
         this.type = _type;
         this.value = _value;
     }
 
-    public Attribut(AccessRight _visibility, State _state, Type _type, String _name) {
+    public Attribut(AccessRight _visibility, State _state, Type _type, Pair<String, PartialType> _identifiant) {
         this.visibility = _visibility;
         this.state = _state;
-        this.name = _name;
+        this.identifiant = _identifiant;
         this.type = _type;
         this.value = null;
     }
     
-    public Attribut(AccessRight _visibility ,Type _type, String _name) {
+    public Attribut(AccessRight _visibility ,Type _type, Pair<String, PartialType> _identifiant) {
         this.visibility = _visibility;
         this.state = null;
-        this.name = _name;
+        this.identifiant = _identifiant;
         this.type = _type;
         this.value = null;
     }
@@ -51,14 +53,14 @@ public class Attribut implements ContentInterface {
     
 
     public String toString() {
-        return this.visibility.toString() + " " + this.state.toString() + " " + this.type + " " + this.name + (this.value != null ? " = " + this.value : "") + ";";
+        return this.visibility.toString() + " " + this.state.toString() + " " + this.type + " " + this.identifiant.getLeft() + (this.value != null ? " = " + this.value : "") + ";";
     }
 
 
 	@Override
 	public String getName() {
 		
-		return this.name;
+		return this.identifiant.getLeft();
 	}
 
 	@Override
@@ -78,7 +80,7 @@ public class Attribut implements ContentInterface {
                 return true;
             }
         } else {
-            Logger.error("Error : Attribut " + this.name + " already exists in the scope");
+            Logger.error("Error : Attribut " + this.identifiant.getLeft() + " already exists in the scope");
             return false;
         }
 	}
@@ -93,7 +95,7 @@ public class Attribut implements ContentInterface {
                 return true;
             }
         } else {
-            Logger.error("Error : Attribut " + this.name + " type not resolved");
+            Logger.error("Error : Attribut " + this.identifiant.getLeft() + " type not resolved");
             return false;
         }
 		
@@ -108,7 +110,7 @@ public class Attribut implements ContentInterface {
             if(this.value.getType().compatibleWith(this.type)) {
                 return true;
             } else {
-                Logger.error("Error : Attribut " + this.name + " value type not compatible with the attribut type");
+                Logger.error("Error : Attribut " + this.identifiant.getLeft() + " value type not compatible with the attribut type");
                 return false;
             }
         } else {

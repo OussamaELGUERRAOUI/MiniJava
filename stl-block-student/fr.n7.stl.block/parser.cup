@@ -78,7 +78,7 @@ terminal String		UL_Identificateur, UL_Chaine, UL_Caractere;
 terminal String		UL_Nombre_Entier, UL_Nombre_Flottant, UL_Nul, UL_Vrai, UL_Faux; // Valeur transmise par l'analyseur lexical
 
 /* Non terminaux avec type renvoyé par actions sémantiques (RESULT = ...) */
-non terminal Block						Program;
+non terminal List<ClasseInterface>		Program;
 /* début modification miniJava */
 non terminal Block						Block; 
 /* fin modification miniJava */
@@ -96,14 +96,16 @@ non terminal Type						Type, Atomique;
 non terminal Expression 				Expression;
 non terminal AssignableExpression		Affectable;
 /* miniJava */
-non terminal							Elements, Main, Class ;
+non terminal List<ClasseInterface>		 Elements;
+non terminal							 Main, Class ;
 non terminal							SingleInherits ;
 non terminal							ClassElements ;
 non terminal							ClassElement ;
-non terminal							 Attribute, Signature, Method, Constructor, ConstructorPrelude;
+non terminal							 Attribute, Method, Constructor, ConstructorPrelude;
 non terminal							ElementNature;
 non terminal AccessRight				AccessRight;
 non terminal  			                Instance;
+non terminal Signature					Signature;
 
 /* Associativité et Priorité relative des opérateurs (du moins prioritaire au plus prioritaire) */
 /* Opérateur le moins prioritiaire */
@@ -182,7 +184,7 @@ Program ::= /* retrait miniJava
 				}
 
 				for(int i = fragments.size()-1; i>=0; i--) {
-					complet.append(list_fragments.get(i));
+					code.append(fragments.get(i));
 				}
 
 				System.out.println("Generated code : ");
@@ -201,16 +203,15 @@ Program ::= /* retrait miniJava
 		;
 
 /* ajout miniJava : classes, attributs, méthodes, constructeurs, etc */
-Elements ::= Main : main
+Elements ::= Main 
 		{:
-          elements.add(main);
-		  RESULT = elements;
+          
+		 
 		:}
-		 List<Element> elements = new LinkedList<>();
-		| Class : classe Elements : elements
+		 
+		| Class Elements
 		{:
-          elements.add(classe);
-          RESULT = elements;
+          
 		:}
 		| UL_Abstrait Class Elements
 		{:
