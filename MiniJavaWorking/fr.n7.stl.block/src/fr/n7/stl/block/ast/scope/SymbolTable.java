@@ -3,7 +3,7 @@
  */
 package fr.n7.stl.block.ast.scope;
 
-import fr.n7.stl.block.ast.classElement.MethodDeclaration;
+import fr.n7.stl.block.ast.classElement.Methode;
 import fr.n7.stl.block.ast.element.ClassDeclaration;
 import fr.n7.stl.block.ast.instruction.declaration.FunctionDeclaration;
 
@@ -24,10 +24,12 @@ public class SymbolTable implements HierarchicalScope<Declaration> {
 	private Map<String, Declaration> declarations;
 	private Scope<Declaration> context;
 	public static FunctionDeclaration functionDeclaration = null;
-	public static MethodDeclaration methodDeclaration = null;
+	public static Methode methode = null;
 	public static ClassDeclaration classDeclaration = null;
 	
 	public static List<ClassDeclaration> classesDeclaration = new ArrayList<>();
+	
+	
 
 	public SymbolTable() {
 		this(null);

@@ -3,8 +3,8 @@
  */
 package fr.n7.stl.block.ast.instruction;
 
-import fr.n7.stl.block.ast.classElement.AttributeDeclaration;
-import fr.n7.stl.block.ast.classElement.MethodDeclaration;
+import fr.n7.stl.block.ast.classElement.Attribut;
+import fr.n7.stl.block.ast.classElement.Methode;
 import fr.n7.stl.block.ast.element.ClassDeclaration;
 import fr.n7.stl.block.ast.expression.AbstractField;
 import fr.n7.stl.block.ast.expression.Expression;
@@ -67,7 +67,7 @@ public class Printer implements Instruction {
 			if (record.getType() instanceof Instance) {
 				for (ClassDeclaration c : SymbolTable.classesDeclaration) {
 					if (c.getName().equals(record.getType().toString())) {
-						for (AttributeDeclaration a : c.getClassAttributes()) {
+						for (Attribut a : c.getClassAttributes()) {
 							if (a.getName().equals(name)) {
 								if (a.getType().equalsTo(AtomicType.BooleanType) || 
 									a.getType().equalsTo(AtomicType.IntegerType) || 
@@ -78,7 +78,7 @@ public class Printer implements Instruction {
 								}
 							}
 						}
-						for (MethodDeclaration m : c.getClassMethods()) {
+						for (Methode m : c.getClassMethods()) {
 							if (m.getName().equals(name)) {
 								if (m.getType().equalsTo(AtomicType.BooleanType) || 
 									m.getType().equalsTo(AtomicType.IntegerType) || 

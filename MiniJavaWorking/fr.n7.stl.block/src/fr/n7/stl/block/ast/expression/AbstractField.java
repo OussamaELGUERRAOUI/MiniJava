@@ -1,8 +1,6 @@
 package fr.n7.stl.block.ast.expression;
 
-import fr.n7.stl.block.ast.classElement.AccessRight;
-import fr.n7.stl.block.ast.classElement.AttributeDeclaration;
-import fr.n7.stl.block.ast.classElement.MethodDeclaration;
+import fr.n7.stl.block.ast.classElement.*;
 import fr.n7.stl.block.ast.element.ClassDeclaration;
 import fr.n7.stl.block.ast.instruction.Return;
 import fr.n7.stl.block.ast.scope.Declaration;
@@ -85,7 +83,7 @@ public abstract class AbstractField implements Expression {
 		if (this.record.toString().equals("this") && SymbolTable.classDeclaration != null) {
 			if ((SymbolTable.classDeclaration.getElementsTable().knows(this.name))) {
 				Declaration _declaration = SymbolTable.classDeclaration.getElementsTable().get(this.name);
-				if (_declaration instanceof AttributeDeclaration) {
+				if (_declaration instanceof Attribut) {
 					return true;
 				} else {
 					Logger.error("The attribute " + this.name + " isn't a class attribute !");
@@ -103,12 +101,12 @@ public abstract class AbstractField implements Expression {
 			if (d instanceof ClassDeclaration) {
 				if (((ClassDeclaration) d).getElementsTable().contains(this.name)) {
 					Declaration dec = ((ClassDeclaration) d).getElementsTable().get(name);
-					if (dec instanceof AttributeDeclaration) {
-						if (((AttributeDeclaration) dec).getAccessRight().equals(AccessRight.Private)) {
+					if (dec instanceof Attribut) {
+						if (((Attribut) dec).getAccessRight().equals(AccessRight.Private)) {
 							Logger.error("The attribute " + name + " is private. It can't be accessed !");
 							return false;
 						} else {
-							_result = _result && ((AttributeDeclaration) dec).fullResolve(_scope);
+							_result = _result && ((Attribut) dec).fullResolve(_scope);
 						}
 					}
 				} else {

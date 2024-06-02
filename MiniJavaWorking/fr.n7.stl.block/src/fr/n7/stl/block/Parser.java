@@ -699,10 +699,10 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 0: // Program ::= Elements 
             {
-              List<Element> RESULT =null;
+              List<ClasseInterface> RESULT =null;
 		Location elementsxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
 		Location elementsxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
-		List<Element> elements = (List<Element>)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		List<ClasseInterface> elements = (List<ClasseInterface>)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG3
  	
 				boolean checkCollect = true;
@@ -800,7 +800,7 @@ class CUP$Parser$actions {
               Object RESULT =null;
 		Location start_valxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xleft;
 		Location start_valxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xright;
-		List<Element> start_val = (List<Element>)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		List<ClasseInterface> start_val = (List<ClasseInterface>)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		RESULT = start_val;
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("$START",0, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -811,13 +811,13 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 2: // Elements ::= Main 
             {
-              List<Element> RESULT =null;
+              List<ClasseInterface> RESULT =null;
 		Location mainxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
 		Location mainxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
-		MainDeclaration main = (MainDeclaration)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		Main main = (Main)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG4
 
-			List<Element> elements = new LinkedList<>();
+			List<ClasseInterface> elements = new LinkedList<>();
 			elements.add(main);
 			RESULT = elements;
 		
@@ -828,13 +828,13 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 3: // Elements ::= Class Elements 
             {
-              List<Element> RESULT =null;
+              List<ClasseInterface> RESULT =null;
 		Location cxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xleft;
 		Location cxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xright;
 		ClassDeclaration c = (ClassDeclaration)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		Location elementsxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
 		Location elementsxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
-		List<Element> elements = (List<Element>)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		List<ClasseInterface> elements = (List<ClasseInterface>)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG5
 
 			elements.add(c);
@@ -847,13 +847,13 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 4: // Elements ::= UL_Abstrait Class Elements 
             {
-              List<Element> RESULT =null;
+              List<ClasseInterface> RESULT =null;
 		Location cxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xleft;
 		Location cxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xright;
 		ClassDeclaration c = (ClassDeclaration)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		Location elementsxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
 		Location elementsxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
-		List<Element> elements = (List<Element>)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		List<ClasseInterface> elements = (List<ClasseInterface>)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG6
 
 			elements.add(c);
@@ -866,13 +866,13 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 5: // Elements ::= UL_Definitif Class Elements 
             {
-              List<Element> RESULT =null;
+              List<ClasseInterface> RESULT =null;
 		Location cxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xleft;
 		Location cxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xright;
 		ClassDeclaration c = (ClassDeclaration)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		Location elementsxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
 		Location elementsxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
-		List<Element> elements = (List<Element>)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		List<ClasseInterface> elements = (List<ClasseInterface>)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG7
 
 			elements.add(c);
@@ -885,13 +885,13 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 6: // Elements ::= Class 
             {
-              List<Element> RESULT =null;
+              List<ClasseInterface> RESULT =null;
 		Location cxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
 		Location cxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
 		ClassDeclaration c = (ClassDeclaration)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG8
 
-			List<Element> elements = new LinkedList<>();
+			List<ClasseInterface> elements = new LinkedList<>();
 			elements.add(c);
 			RESULT = elements;
 		
@@ -902,13 +902,13 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 7: // Elements ::= UL_Abstrait Class 
             {
-              List<Element> RESULT =null;
+              List<ClasseInterface> RESULT =null;
 		Location cxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
 		Location cxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
 		ClassDeclaration c = (ClassDeclaration)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG9
 
-			List<Element> elements = new LinkedList<>();
+			List<ClasseInterface> elements = new LinkedList<>();
 			elements.add(c);
 			RESULT = elements;
 		
@@ -919,13 +919,13 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 8: // Elements ::= UL_Definitif Class 
             {
-              List<Element> RESULT =null;
+              List<ClasseInterface> RESULT =null;
 		Location cxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
 		Location cxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
 		ClassDeclaration c = (ClassDeclaration)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG10
 
-			List<Element> elements = new LinkedList<>();
+			List<ClasseInterface> elements = new LinkedList<>();
 			elements.add(c);
 			RESULT = elements;
 		
@@ -942,18 +942,18 @@ class CUP$Parser$actions {
 		String name = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-4)).value;
 		Location classElementsxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xleft;
 		Location classElementsxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xright;
-		List<ClassElement> classElements = (List<ClassElement>)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		List<ContentInterface> classElements = (List<ContentInterface>)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		//@@CUPDBG11
 
 			boolean consTrouve = false;
-			for (ClassElement element : classElements) {
-				if (element instanceof ConstructorDeclaration) {
+			for (ContentInterface element : classElements) {
+				if (element instanceof Constructeur) {
 					consTrouve = true;
 					break;
 				}
 			}
 			if (!consTrouve) {
-				ConstructorDeclaration consParDefaut = new ConstructorDeclaration(name, null, null);
+				Constructeur consParDefaut = new Constructeur(name, null, null);
 				classElements.add(consParDefaut);
 			}
 			RESULT = new ClassDeclaration(name, classElements);
@@ -965,7 +965,7 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 10: // Main ::= UL_Public UL_Classe UL_Classe_Principale UL_Accolade_Ouvrante UL_Public UL_De_Classe UL_Type_Vide UL_Methode_Principale UL_Parenthese_Ouvrante Parameters UL_Parenthese_Fermante Block UL_Accolade_Fermante 
             {
-              MainDeclaration RESULT =null;
+              Main RESULT =null;
 		Location parametersxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).xleft;
 		Location parametersxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).xright;
 		List<ParameterDeclaration> parameters = (List<ParameterDeclaration>)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
@@ -974,7 +974,7 @@ class CUP$Parser$actions {
 		Block block = (Block)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		//@@CUPDBG12
 
-			RESULT = new MainDeclaration(parameters, block);
+			RESULT = new Main(parameters, block);
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Main",17, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-12)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -1020,10 +1020,10 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 14: // ClassElements ::= 
             {
-              List<ClassElement> RESULT =null;
+              List<ContentInterface> RESULT =null;
 		//@@CUPDBG16
 
-			List<ClassElement> classElements = new LinkedList<>();
+			List<ContentInterface> classElements = new LinkedList<>();
 			RESULT = classElements;
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("ClassElements",20, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -1033,13 +1033,13 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 15: // ClassElements ::= ClassElement ClassElements 
             {
-              List<ClassElement> RESULT =null;
+              List<ContentInterface> RESULT =null;
 		Location elementxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xleft;
 		Location elementxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).xright;
-		ClassElement element = (ClassElement)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		ContentInterface element = (ContentInterface)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		Location classElementsxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
 		Location classElementsxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
-		List<ClassElement> classElements = (List<ClassElement>)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		List<ContentInterface> classElements = (List<ContentInterface>)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG17
 
 			classElements.add(element);
@@ -1088,10 +1088,10 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 19: // ClassElement ::= Attribute 
             {
-              ClassElement RESULT =null;
+              ContentInterface RESULT =null;
 		Location attributexleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
 		Location attributexright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
-		AttributeDeclaration attribute = (AttributeDeclaration)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		Attribut attribute = (Attribut)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG21
 
 			RESULT = attribute;
@@ -1103,10 +1103,10 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 20: // ClassElement ::= Method 
             {
-              ClassElement RESULT =null;
+              ContentInterface RESULT =null;
 		Location methodxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
 		Location methodxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
-		MethodDeclaration method = (MethodDeclaration)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		Methode method = (Methode)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG22
 
 			RESULT = method;
@@ -1118,10 +1118,10 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 21: // ClassElement ::= Constructor 
             {
-              ClassElement RESULT =null;
+              ContentInterface RESULT =null;
 		Location constructeurxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xleft;
 		Location constructeurxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.peek()).xright;
-		ConstructorDeclaration constructeur = (ConstructorDeclaration)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		Constructeur constructeur = (Constructeur)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG23
 
 			RESULT = constructeur;
@@ -1133,7 +1133,7 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 22: // Attribute ::= AccessRight Type Identifiant UL_Point_Virgule 
             {
-              AttributeDeclaration RESULT =null;
+              Attribut RESULT =null;
 		Location accessxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).xleft;
 		Location accessxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).xright;
 		AccessRight access = (AccessRight)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
@@ -1145,7 +1145,7 @@ class CUP$Parser$actions {
 		Pair<String,PartialType> identifiant = (Pair<String,PartialType>)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		//@@CUPDBG24
 
-			RESULT = new AttributeDeclaration(access, ElementState.None, type, identifiant, null);
+			RESULT = new Attribut(access, State.None, type, identifiant);
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Attribute",23, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -1154,7 +1154,7 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 23: // Attribute ::= AccessRight UL_De_Classe Type Identifiant UL_Egal Expression UL_Point_Virgule 
             {
-              AttributeDeclaration RESULT =null;
+              Attribut RESULT =null;
 		Location accessxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)).xleft;
 		Location accessxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)).xright;
 		AccessRight access = (AccessRight)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-6)).value;
@@ -1169,7 +1169,7 @@ class CUP$Parser$actions {
 		Expression valeur = (Expression)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		//@@CUPDBG25
 
-			RESULT = new AttributeDeclaration(access, ElementState.Static, type, identifiant, valeur);
+			RESULT = new Attribut(access, State.Static, type, identifiant, valeur);
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Attribute",23, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -1178,7 +1178,7 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 24: // Attribute ::= AccessRight UL_De_Classe UL_Definitif Type Identifiant UL_Egal Expression UL_Point_Virgule 
             {
-              AttributeDeclaration RESULT =null;
+              Attribut RESULT =null;
 		Location accessxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)).xleft;
 		Location accessxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)).xright;
 		AccessRight access = (AccessRight)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-7)).value;
@@ -1193,7 +1193,7 @@ class CUP$Parser$actions {
 		Expression valeur = (Expression)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		//@@CUPDBG26
 
-			RESULT = new AttributeDeclaration(access, ElementState.StaticFinal, type, identifiant, valeur);
+			RESULT = new Attribut(access, State.StaticFinal, type, identifiant, valeur);
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Attribute",23, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -1202,7 +1202,7 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 25: // Attribute ::= AccessRight UL_Definitif Type Identifiant UL_Egal Expression UL_Point_Virgule 
             {
-              AttributeDeclaration RESULT =null;
+              Attribut RESULT =null;
 		Location accessxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)).xleft;
 		Location accessxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)).xright;
 		AccessRight access = (AccessRight)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-6)).value;
@@ -1217,7 +1217,7 @@ class CUP$Parser$actions {
 		Expression valeur = (Expression)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		//@@CUPDBG27
 
-			RESULT = new AttributeDeclaration(access, ElementState.Final, type, identifiant, valeur);
+			RESULT = new Attribut(access, State.Final, type, identifiant, valeur);
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Attribute",23, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -1226,7 +1226,7 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 26: // Method ::= AccessRight Signature Block 
             {
-              MethodDeclaration RESULT =null;
+              Methode RESULT =null;
 		Location accessxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xleft;
 		Location accessxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).xright;
 		AccessRight access = (AccessRight)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
@@ -1238,7 +1238,7 @@ class CUP$Parser$actions {
 		Block corps = (Block)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG28
 
-			RESULT = new MethodDeclaration(access, ElementState.None, entete, corps);
+			RESULT = new Methode(access, State.None, entete, corps);
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Method",25, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -1247,7 +1247,7 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 27: // Method ::= AccessRight UL_Definitif Signature Block 
             {
-              MethodDeclaration RESULT =null;
+              Methode RESULT =null;
 		Location accessxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).xleft;
 		Location accessxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).xright;
 		AccessRight access = (AccessRight)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
@@ -1259,7 +1259,7 @@ class CUP$Parser$actions {
 		Block corps = (Block)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG29
 
-			RESULT = new MethodDeclaration(access, ElementState.Final, entete, corps);
+			RESULT = new Methode(access, State.Final, entete, corps);
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Method",25, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -1268,7 +1268,7 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 28: // Method ::= AccessRight UL_De_Classe Signature Block 
             {
-              MethodDeclaration RESULT =null;
+              Methode RESULT =null;
 		Location accessxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).xleft;
 		Location accessxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).xright;
 		AccessRight access = (AccessRight)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
@@ -1280,7 +1280,7 @@ class CUP$Parser$actions {
 		Block corps = (Block)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG30
 
-			RESULT = new MethodDeclaration(access, ElementState.Static, entete, corps);
+			RESULT = new Methode(access, State.Static, entete, corps);
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Method",25, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -1289,7 +1289,7 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 29: // Method ::= AccessRight UL_De_Classe UL_Definitif Signature Block 
             {
-              MethodDeclaration RESULT =null;
+              Methode RESULT =null;
 		Location accessxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)).xleft;
 		Location accessxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)).xright;
 		AccessRight access = (AccessRight)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-4)).value;
@@ -1301,7 +1301,7 @@ class CUP$Parser$actions {
 		Block corps = (Block)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG31
 
-			RESULT = new MethodDeclaration(access, ElementState.StaticFinal, entete, corps);
+			RESULT = new Methode(access, State.StaticFinal, entete, corps);
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Method",25, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -1310,7 +1310,7 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 30: // Method ::= AccessRight UL_Abstrait Signature UL_Point_Virgule 
             {
-              MethodDeclaration RESULT =null;
+              Methode RESULT =null;
 		Location accessxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).xleft;
 		Location accessxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).xright;
 		AccessRight access = (AccessRight)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
@@ -1319,7 +1319,7 @@ class CUP$Parser$actions {
 		Signature entete = (Signature)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		//@@CUPDBG32
 
-			RESULT = new MethodDeclaration(access, ElementState.None, entete, null);
+			RESULT = new Methode(access, State.None, entete, null);
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Method",25, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -1340,7 +1340,7 @@ class CUP$Parser$actions {
 		List<ParameterDeclaration> parametres = (List<ParameterDeclaration>)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		//@@CUPDBG33
 
-			RESULT = new Signature(type, identifiant, parametres);
+			RESULT = new Signature(identifiant, type, parametres);
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Signature",24, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -1358,7 +1358,7 @@ class CUP$Parser$actions {
 		Pair<String,PartialType> identifiant = (Pair<String,PartialType>)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
 		//@@CUPDBG34
 
-			RESULT = new Signature(type, identifiant, null);
+			RESULT = new Signature(identifiant, type);
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Signature",24, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -1367,7 +1367,7 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 33: // Constructor ::= AccessRight UL_Identificateur UL_Parenthese_Ouvrante Parameters UL_Parenthese_Fermante Block 
             {
-              ConstructorDeclaration RESULT =null;
+              Constructeur RESULT =null;
 		Location UL_Publicxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).xleft;
 		Location UL_Publicxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).xright;
 		AccessRight UL_Public = (AccessRight)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-5)).value;
@@ -1382,7 +1382,7 @@ class CUP$Parser$actions {
 		Block corps = (Block)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG35
 
-			RESULT = new ConstructorDeclaration(nom, parametres, corps);
+			RESULT = new Constructeur(nom, parametres, corps);
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Constructor",26, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -1391,7 +1391,7 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 34: // Constructor ::= AccessRight UL_Identificateur UL_Parenthese_Ouvrante UL_Parenthese_Fermante Block 
             {
-              ConstructorDeclaration RESULT =null;
+              Constructeur RESULT =null;
 		Location UL_Publicxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)).xleft;
 		Location UL_Publicxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)).xright;
 		AccessRight UL_Public = (AccessRight)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-4)).value;
@@ -1403,7 +1403,7 @@ class CUP$Parser$actions {
 		Block corps = (Block)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		//@@CUPDBG36
 
-			RESULT = new ConstructorDeclaration(nom, null, corps);
+			RESULT = new Constructeur(nom, null, corps);
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Constructor",26, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }

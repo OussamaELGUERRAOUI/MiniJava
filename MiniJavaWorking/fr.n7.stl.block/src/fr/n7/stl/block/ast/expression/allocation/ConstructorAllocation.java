@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import fr.n7.stl.block.ast.SemanticsUndefinedException;
-import fr.n7.stl.block.ast.classElement.ConstructorDeclaration;
+import fr.n7.stl.block.ast.classElement.Constructeur;
 import fr.n7.stl.block.ast.element.ClassDeclaration;
 import fr.n7.stl.block.ast.expression.Expression;
 import fr.n7.stl.block.ast.scope.Declaration;
@@ -58,9 +58,9 @@ public class ConstructorAllocation implements Expression {
         }*/
         boolean _result = true;
         if (d instanceof ClassDeclaration) {
-            List<ConstructorDeclaration> constructors = ((ClassDeclaration) d).getClassConstructors();
+            List<Constructeur> constructeurs = ((ClassDeclaration) d).getClassConstructeurs();
             boolean found = false;
-            for (ConstructorDeclaration c : constructors) {
+            for (Constructeur c : constructeurs) {
                 if (name.equals(c.getName())) {
                     found = true;
                     if (this.parameters != null) {
@@ -94,9 +94,9 @@ public class ConstructorAllocation implements Expression {
         }
         boolean _result = true;
         if (d instanceof ClassDeclaration) {
-            List<ConstructorDeclaration> constructors = ((ClassDeclaration) d).getClassConstructors();
+            List<Constructeur> constructeurs = ((ClassDeclaration) d).getClassConstructeurs();
             boolean found = false;
-            for (ConstructorDeclaration c : constructors) {
+            for (Constructeur c : constructeurs) {
                 if (name.equals(c.getName())) {
                     found = true;
                     if (this.parameters != null) {

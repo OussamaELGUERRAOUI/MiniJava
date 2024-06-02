@@ -3,8 +3,8 @@
  */
 package fr.n7.stl.block.ast.expression.accessible;
 
-import fr.n7.stl.block.ast.classElement.AttributeDeclaration;
-import fr.n7.stl.block.ast.classElement.MethodDeclaration;
+import fr.n7.stl.block.ast.classElement.Attribut;
+import fr.n7.stl.block.ast.classElement.Methode;
 import fr.n7.stl.block.ast.element.ClassDeclaration;
 import fr.n7.stl.block.ast.expression.AbstractField;
 import fr.n7.stl.block.ast.expression.Expression;
@@ -42,14 +42,14 @@ public class FieldAccess extends AbstractField implements Expression {
 		if (this.recordType == null) {
 			
 			if (SymbolTable.classDeclaration != null) {
-				for (AttributeDeclaration a : SymbolTable.classDeclaration.getClassAttributes()) {
+				for (Attribut a : SymbolTable.classDeclaration.getClassAttributes()) {
 					if (a.getName().equals(this.name)) {
 						_keep = a.getType().length();
 					}
 					break;
 				}
 				
-				for (MethodDeclaration m : SymbolTable.classDeclaration.getClassMethods()) {
+				for (Methode m : SymbolTable.classDeclaration.getClassMethods()) {
 					if (m.getName().equals(this.name)) {
 						_keep = m.getType().length();
 					}
@@ -57,14 +57,14 @@ public class FieldAccess extends AbstractField implements Expression {
 				}
 			} else {
 				for (ClassDeclaration c : SymbolTable.classesDeclaration) {
-					for (AttributeDeclaration a : c.getClassAttributes()) {
+					for (Attribut a : c.getClassAttributes()) {
 						if (a.getName().equals(this.name)) {
 							_keep = a.getType().length();
 						}
 						break;
 					}
 					
-					for (MethodDeclaration m : c.getClassMethods()) {
+					for (Methode m : c.getClassMethods()) {
 						if (m.getName().equals(this.name)) {
 							_keep = m.getType().length();
 						}

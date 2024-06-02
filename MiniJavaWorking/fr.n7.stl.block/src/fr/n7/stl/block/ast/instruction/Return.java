@@ -3,7 +3,7 @@
  */
 package fr.n7.stl.block.ast.instruction;
 
-import static fr.n7.stl.block.ast.scope.SymbolTable.methodDeclaration;
+import static fr.n7.stl.block.ast.scope.SymbolTable.*;
 
 import fr.n7.stl.block.ast.expression.AbstractField;
 import fr.n7.stl.block.ast.expression.Expression;
@@ -72,14 +72,14 @@ public class Return implements Instruction {
 	@Override
 	public boolean checkType() {
 		if (this.value.getType().compatibleWith(AtomicType.ErrorType) && this.value instanceof AbstractField) {
-			if (SymbolTable.methodDeclaration.getType().compatibleWith(SymbolTable.classDeclaration.getElementsTable().get(((AbstractField) this.value).getName()).getType())) {
+			if (SymbolTable.methode.getType().compatibleWith(SymbolTable.classDeclaration.getElementsTable().get(((AbstractField) this.value).getName()).getType())) {
 				return true;	
 			} else {
-				Logger.error(SymbolTable.methodDeclaration.getName() + " is not compatible with " + this.value);
+				Logger.error(SymbolTable.methode.getName() + " is not compatible with " + this.value);
 				return false;
 			}
 		} else {
-			return this.value.getType().compatibleWith(methodDeclaration.getType());
+			return this.value.getType().compatibleWith(methode.getType());
 		} 
 	}
 

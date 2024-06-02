@@ -6,7 +6,7 @@ import java.util.List;
 
 import fr.n7.stl.block.ast.SemanticsUndefinedException;
 import fr.n7.stl.block.ast.classElement.AccessRight;
-import fr.n7.stl.block.ast.classElement.MethodDeclaration;
+import fr.n7.stl.block.ast.classElement.*;
 import fr.n7.stl.block.ast.element.ClassDeclaration;
 import fr.n7.stl.block.ast.expression.Expression;
 import fr.n7.stl.block.ast.instruction.declaration.VariableDeclaration;
@@ -71,9 +71,9 @@ public class MethodCall implements Instruction {
 			        Declaration d = _scope.get(_type.toString());
 			        this.type = d.getType();
                     if (d instanceof ClassDeclaration) {
-                        List<MethodDeclaration> methods = ((ClassDeclaration) d).getClassMethods();
+                        List<Methode> methods = ((ClassDeclaration) d).getClassMethods();
                         boolean found = false;
-                        for (MethodDeclaration m : methods) {
+                        for (Methode m : methods) {
                             if (id.equals(m.getName())) {
                                 if (m.getAccessRight().equals(AccessRight.Private)) {
 							        Logger.error("The method " + name + " is private. It can't be called !");
@@ -130,9 +130,9 @@ public class MethodCall implements Instruction {
 		        if (_type instanceof Instance) {
 			        Declaration d = _scope.get(_type.toString());
 			        if (d instanceof ClassDeclaration) {
-                        List<MethodDeclaration> methods = ((ClassDeclaration) d).getClassMethods();
+                        List<Methode> methods = ((ClassDeclaration) d).getClassMethods();
                         boolean found = false;
-                        for (MethodDeclaration m : methods) {
+                        for (Methode m : methods) {
                             if (id.equals(m.getName())) {
                                 if (m.getAccessRight().equals(AccessRight.Private)) {
 							        Logger.error("The method " + name + " is private. It can't be called !");
@@ -183,7 +183,7 @@ public class MethodCall implements Instruction {
         if (this.type instanceof Instance) {
             for (ClassDeclaration c : SymbolTable.classesDeclaration) {
                 if (c.getName().equals(this.type.toString())) {
-                    for (MethodDeclaration m : c.getClassMethods()) {
+                    for (Methode m : c.getClassMethods()) {
                         if (m.getName().equals(name)) {
                             _result = true;
                         }

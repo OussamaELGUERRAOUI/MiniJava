@@ -5,11 +5,8 @@ import java.util.List;
 
 import javax.swing.text.html.HTMLDocument.BlockElement;
 
-import fr.n7.stl.block.ast.classElement.ClassElement;
-import fr.n7.stl.block.ast.classElement.ConstructorDeclaration;
-import fr.n7.stl.block.ast.classElement.MethodDeclaration;
+import fr.n7.stl.block.ast.classElement.*;
 import fr.n7.stl.block.ast.SemanticsUndefinedException;
-import fr.n7.stl.block.ast.classElement.AttributeDeclaration;
 import fr.n7.stl.block.ast.element.ClassDeclaration;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
@@ -17,7 +14,7 @@ import fr.n7.stl.block.ast.scope.Scope;
 import fr.n7.stl.block.ast.scope.SymbolTable;
 import fr.n7.stl.util.Logger;
 
-public class Instance implements Type, Scope<ClassElement> {
+public class Instance implements Type, Scope<ContentInterface> {
 
     private String name;
 
@@ -41,20 +38,20 @@ public class Instance implements Type, Scope<ClassElement> {
         this.classDeclaration = d;
     }
 
-    public List<ClassElement> getAllElements() {
+    public List<ContentInterface> getAllElements() {
         return this.classDeclaration.getClassElements();
     }
 
-    public List<AttributeDeclaration> getAttributes() {
+    public List<Attribut> getAttributes() {
         return this.classDeclaration.getClassAttributes();
     }
 
-    public List<MethodDeclaration> getMethods() {
+    public List<Methode> getMethods() {
         return this.classDeclaration.getClassMethods();
     }
 
-    public List<ConstructorDeclaration> getConstructors() {
-        return this.classDeclaration.getClassConstructors();
+    public List<Constructeur> getConstructors() {
+        return this.classDeclaration.getClassConstructeurs();
     }
 
     @Override
@@ -106,7 +103,7 @@ public class Instance implements Type, Scope<ClassElement> {
                 /**for (MethodDeclaration m : c.getClassMethods()) {
                   _result += m.getType().length();
                 }*/
-                for (AttributeDeclaration a : c.getClassAttributes()) {
+                for (Attribut a : c.getClassAttributes()) {
                     _result += a.getType().length();
                 }
             }
@@ -133,10 +130,10 @@ public class Instance implements Type, Scope<ClassElement> {
     }
 
     @Override
-    public ClassElement get(String _name) {
+    public ContentInterface get(String _name) {
         boolean _found = false;
-        Iterator<ClassElement> _iter = this.getAllElements().iterator();
-        ClassElement _current = null;
+        Iterator<ContentInterface> _iter = this.getAllElements().iterator();
+        ContentInterface _current = null;
         while (_iter.hasNext() && (!_found)) {
             _current = _iter.next();
             _found = _found || _current.getName().contentEquals(_name);
@@ -151,7 +148,7 @@ public class Instance implements Type, Scope<ClassElement> {
     @Override
     public boolean contains(String _name) {
         boolean _result = false;
-        Iterator<ClassElement> _iter = this.classDeclaration.getClassElements().iterator();
+        Iterator<ContentInterface> _iter = this.classDeclaration.getClassElements().iterator();
         while (_iter.hasNext() && (!_result)) {
             _result = _result || _iter.next().getName().contentEquals(_name);
         }
@@ -159,12 +156,12 @@ public class Instance implements Type, Scope<ClassElement> {
     }
 
     @Override
-    public boolean accepts(ClassElement _declaration) {
+    public boolean accepts(ContentInterface _declaration) {
         return !this.contains(_declaration.getName());
     }
 
     @Override
-    public void register(ClassElement _declaration) {
+    public void register(ContentInterface _declaration) {
         throw new SemanticsUndefinedException("register undifined");
     }
 

@@ -84,7 +84,7 @@ terminal String		UL_Identificateur, UL_Chaine, UL_Caractere;
 terminal String		UL_Nombre_Entier, UL_Nombre_Flottant, UL_Nul, UL_Vrai, UL_Faux; // Valeur transmise par l'analyseur lexical
 
 /* Non terminaux avec type renvoyé par actions sémantiques (RESULT = ...) */
-non terminal List<Element>					Program;
+non terminal List<ClasseInterface>					Program;
 non terminal Block						Block; 
 non terminal List<Instruction>			Instructions; 
 non terminal Instruction				Instruction;
@@ -99,17 +99,17 @@ non terminal Pair<String,PartialType>	Identifiant;
 non terminal Type						Type, Atomique;
 non terminal Expression 				Expression;
 non terminal AssignableExpression		Affectable;
-non terminal List<Element>				Elements;
-non terminal MainDeclaration			Main;
+non terminal List<ClasseInterface>				Elements;
+non terminal Main             			Main;
 non terminal ClassDeclaration           Class;
 non terminal							SingleInherits;
-non terminal List<ClassElement>			ClassElements;
+non terminal List<ContentInterface>			ClassElements;
 non terminal Instance					Instance;
-non terminal ClassElement               ClassElement;
-non terminal AttributeDeclaration		Attribute; 
+non terminal ContentInterface               ClassElement;
+non terminal Attribut            		Attribute; 
 non terminal Signature					Signature;
-non terminal MethodDeclaration          Method; 
-non terminal ConstructorDeclaration     Constructor;
+non terminal Methode                     Method; 
+non terminal Constructeur               Constructor;
 non terminal							ConstructorPrelude;
 non terminal AccessRight				AccessRight;
 non terminal						    ElementNature;
@@ -227,7 +227,7 @@ Program ::= Elements:elements
 
 Elements ::= Main:main
 		{:
-			List<Element> elements = new LinkedList<>();
+			List<ClasseInterface> elements = new LinkedList<>();
 			elements.add(main);
 			RESULT = elements;
 		:}
@@ -248,19 +248,19 @@ Elements ::= Main:main
 		:}
 		| Class:c
 		{:
-			List<Element> elements = new LinkedList<>();
+			List<ClasseInterface> elements = new LinkedList<>();
 			elements.add(c);
 			RESULT = elements;
 		:}
 		| UL_Abstrait Class:c
 		{:
-			List<Element> elements = new LinkedList<>();
+			List<ClasseInterface> elements = new LinkedList<>();
 			elements.add(c);
 			RESULT = elements;
 		:}
 		| UL_Definitif Class:c
 		{:
-			List<Element> elements = new LinkedList<>();
+			List<ClasseInterface> elements = new LinkedList<>();
 			elements.add(c);
 			RESULT = elements;
 		:}
@@ -270,14 +270,14 @@ Class ::= UL_Classe UL_Identificateur:name SingleInherits
 		UL_Accolade_Ouvrante ClassElements:classElements UL_Accolade_Fermante
 		{:
 			boolean consTrouve = false;
-			for (ClassElement element : classElements) {
-				if (element instanceof ConstructorDeclaration) {
+			for (ContentInterface element : classElements) {
+				if (element instanceof Constructeur) {
 					consTrouve = true;
 					break;
 				}
 			}
 			if (!consTrouve) {
-				ConstructorDeclaration consParDefaut = new ConstructorDeclaration(name, null, null);
+				Constructeur consParDefaut = new Constructeur(name, null, null);
 				classElements.add(consParDefaut);
 			}
 			RESULT = new ClassDeclaration(name, classElements);
@@ -289,7 +289,7 @@ Main ::= UL_Public UL_Classe UL_Classe_Principale
 			UL_Public UL_De_Classe UL_Type_Vide UL_Methode_Principale 
 			UL_Parenthese_Ouvrante Parameters:parameters UL_Parenthese_Fermante Block:block UL_Accolade_Fermante
 		{:
-			RESULT = new MainDeclaration(parameters, block);
+			RESULT = new Main(parameters, block);
 		:}
 		;
 				
@@ -310,7 +310,7 @@ Instance ::= UL_Identificateur:nom
 		
 ClassElements ::=
 		{:
-			List<ClassElement> classElements = new LinkedList<>();
+			List<ContentInterface> classElements = new LinkedList<>();
 			RESULT = classElements;
 		:}
 		| ClassElement:element ClassElements:classElements
@@ -354,73 +354,73 @@ ClassElement ::=
 Attribute ::=
 		AccessRight:access Type:type Identifiant:identifiant UL_Point_Virgule
 		{:
-			RESULT = new AttributeDeclaration(access, ElementState.None, type, identifiant, null);
+			RESULT = new Attribut(access, State.None, type, identifiant);
 		:}
 		|
 		AccessRight:access UL_De_Classe Type:type Identifiant:identifiant UL_Egal Expression:valeur UL_Point_Virgule
 		{:
-			RESULT = new AttributeDeclaration(access, ElementState.Static, type, identifiant, valeur);
+			RESULT = new Attribut(access, State.Static, type, identifiant, valeur);
 		:}
 		|
 		AccessRight:access UL_De_Classe UL_Definitif Type:type Identifiant:identifiant UL_Egal Expression:valeur UL_Point_Virgule
 		{:
-			RESULT = new AttributeDeclaration(access, ElementState.StaticFinal, type, identifiant, valeur);
+			RESULT = new Attribut(access, State.StaticFinal, type, identifiant, valeur);
 		:}
 		|
 		AccessRight:access UL_Definitif Type:type Identifiant:identifiant UL_Egal Expression:valeur UL_Point_Virgule
 		{:
-			RESULT = new AttributeDeclaration(access, ElementState.Final, type, identifiant, valeur);
+			RESULT = new Attribut(access, State.Final, type, identifiant, valeur);
 		:}
 		;
 		
 Method ::=
 		AccessRight:access Signature:entete Block:corps
 		{:
-			RESULT = new MethodDeclaration(access, ElementState.None, entete, corps);
+			RESULT = new Methode(access, State.None, entete, corps);
 		:}
 		| 
 		AccessRight:access UL_Definitif Signature:entete Block:corps
 		{:
-			RESULT = new MethodDeclaration(access, ElementState.Final, entete, corps);
+			RESULT = new Methode(access, State.Final, entete, corps);
 		:}
 		| 
 		AccessRight:access UL_De_Classe Signature:entete Block:corps
 		{:
-			RESULT = new MethodDeclaration(access, ElementState.Static, entete, corps);
+			RESULT = new Methode(access, State.Static, entete, corps);
 		:}
 		| 
 		AccessRight:access UL_De_Classe UL_Definitif Signature:entete Block:corps
 		{:
-			RESULT = new MethodDeclaration(access, ElementState.StaticFinal, entete, corps);
+			RESULT = new Methode(access, State.StaticFinal, entete, corps);
 		:}
 		| 
 		AccessRight:access UL_Abstrait Signature:entete UL_Point_Virgule
 		{:
-			RESULT = new MethodDeclaration(access, ElementState.None, entete, null);
+			RESULT = new Methode(access, State.None, entete, null);
 		:}
 		;
 		
 Signature ::=
 		Type:type Identifiant:identifiant UL_Parenthese_Ouvrante Parameters:parametres UL_Parenthese_Fermante
 		{:
-			RESULT = new Signature(type, identifiant, parametres);
+			RESULT = new Signature(identifiant, type, parametres);
 		:}
 		|
 		Type:type Identifiant:identifiant UL_Parenthese_Ouvrante UL_Parenthese_Fermante
 		{:
-			RESULT = new Signature(type, identifiant, null);
+			RESULT = new Signature(identifiant, type);
 		:}
 		;
 		
 Constructor ::=
 		AccessRight:UL_Public UL_Identificateur:nom UL_Parenthese_Ouvrante Parameters:parametres UL_Parenthese_Fermante Block:corps
 		{:
-			RESULT = new ConstructorDeclaration(nom, parametres, corps);
+			RESULT = new Constructeur(nom, parametres, corps);
 		:}
 		|
 		AccessRight:UL_Public UL_Identificateur:nom UL_Parenthese_Ouvrante UL_Parenthese_Fermante Block:corps
 		{:
-			RESULT = new ConstructorDeclaration(nom, null, corps);
+			RESULT = new Constructeur(nom, null, corps);
 		:}
 		;
 

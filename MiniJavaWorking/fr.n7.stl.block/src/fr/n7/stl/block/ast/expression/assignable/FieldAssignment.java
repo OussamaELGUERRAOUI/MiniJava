@@ -3,8 +3,8 @@
  */
 package fr.n7.stl.block.ast.expression.assignable;
 
-import fr.n7.stl.block.ast.classElement.AttributeDeclaration;
-import fr.n7.stl.block.ast.classElement.MethodDeclaration;
+import fr.n7.stl.block.ast.classElement.Attribut;
+import fr.n7.stl.block.ast.classElement.Methode;
 import fr.n7.stl.block.ast.element.ClassDeclaration;
 import fr.n7.stl.block.ast.expression.AbstractField;
 import fr.n7.stl.block.ast.expression.BinaryOperator;
@@ -45,36 +45,16 @@ public class FieldAssignment extends AbstractField implements AssignableExpressi
 		_result.append(this.record.getCode(_factory));
 		if (recordType == null) {
 			if (SymbolTable.classDeclaration != null) {
-				for (AttributeDeclaration a : SymbolTable.classDeclaration.getClassAttributes()) {
+				for (Attribut a : SymbolTable.classDeclaration.getClassAttributes()) {
 					if (a.getName().equals(this.name)) {
-						/**_value = a.getType().length();
-						_result.add(_factory.createLoadL(_value));
-						_result.add(TAMFactory.createBinaryOperator(BinaryOperator.Add));
-						_result.add(_factory.createLoad(
-							Register.LB,
-							-a.getType().length(),
-							a.getType().length()));
-							*/
 						_result.add(_factory.createStore(Register.HT, 0, a.getType().length()));
 					}
 				}
-				for (MethodDeclaration m : SymbolTable.classDeclaration.getClassMethods()) {
-					if (m.getName().equals(this.name)) {
-						/*_value = m.getType().length();
-						_result.add(_factory.createLoadL(_value));
-						_result.add(TAMFactory.createBinaryOperator(BinaryOperator.Add));
-						*/
-						/*_result.add(_factory.createLoad(
-							Register.LB,
-							-m.getType().length(),
-							m.getType().length()));
-						_result.add(_factory.createStore(m.getType().length(), -1[LB]));
-						*/
-					}
-				}
+				
+				
 			} else {
 				for (ClassDeclaration c : SymbolTable.classesDeclaration) {
-					for (AttributeDeclaration a : c.getClassAttributes()) {
+					for (Attribut a : c.getClassAttributes()) {
 						if (a.getName().equals(this.name)) {
 							_value = a.getType().length();
 							_result.add(_factory.createLoadL(_value));
@@ -82,7 +62,7 @@ public class FieldAssignment extends AbstractField implements AssignableExpressi
 							_result.add(_factory.createStoreI(a.getType().length()));
 						}
 					}
-					for (MethodDeclaration m : c.getClassMethods()) {
+					for (Methode m : c.getClassMethods()) {
 						if (m.getName().equals(this.name)) {
 							_value = m.getType().length();
 							_result.add(_factory.createLoadL(_value));

@@ -2,23 +2,24 @@ package fr.n7.stl.block.ast.element;
 
 import java.util.List;
 
-import fr.n7.stl.block.ast.classElement.ClassElement;
+
+import fr.n7.stl.block.ast.classElement.ContentInterface;
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
 
-public class InterfaceDeclaration implements Element {
+public class InterfaceDeclaration implements ClasseInterface {
 
     protected String name;
 
-    protected List<ClassElement> interfaceElements;
+    protected List<ContentInterface> interfaceElements;
 
 	/**
 	 * Constructor for a Main.
 	 */
-	public InterfaceDeclaration(String _name, List<ClassElement> _classElements) {
+	public InterfaceDeclaration(String _name, List<ContentInterface> _classElements) {
 		this.name = _name;
 		this.interfaceElements = _classElements;
 	}

@@ -2,7 +2,8 @@ package fr.n7.stl.block.ast;
 
 import java.util.List;
 
-import fr.n7.stl.block.ast.element.Element;
+import fr.n7.stl.block.ast.element.ClasseInterface;
+
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
 import fr.n7.stl.tam.ast.Fragment;
@@ -14,12 +15,12 @@ public class Elements {
 	/**
 	 * Sequence of instructions contained in a block.
 	 */
-	protected List<Element> elements;
+	protected List<ClasseInterface> elements;
 
 	/**
 	 * Constructor for a block.
 	 */
-	public Elements(List<Element> _elements) {
+	public Elements(List<ClasseInterface> _elements) {
 		this.elements = _elements;
 	}
 	
@@ -30,7 +31,7 @@ public class Elements {
 	public String toString() {
 		System.out.println("test");
 		String _result = "";
-		for (Element _element : this.elements) {
+		for (ClasseInterface _element : this.elements) {
 			_result += _element;
 		}
 		return _result;
