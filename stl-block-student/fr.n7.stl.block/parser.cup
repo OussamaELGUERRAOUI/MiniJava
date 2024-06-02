@@ -14,6 +14,7 @@ import java.util.*;
 // Elements du métamodèle pour la construction de l'arbre abstrait
 import fr.n7.stl.block.ast.*;
 import fr.n7.stl.block.ast.classContent.*;
+import fr.n7.stl.block.ast.classes.*;
 import fr.n7.stl.block.ast.expression.*;
 import fr.n7.stl.block.ast.expression.accessible.*;
 import fr.n7.stl.block.ast.expression.allocation.*;
@@ -25,6 +26,9 @@ import fr.n7.stl.block.ast.scope.*;
 import fr.n7.stl.block.ast.type.*;
 import fr.n7.stl.block.ast.type.declaration.*;
 import fr.n7.stl.util.*;
+import fr.n7.stl.tam.ast.*;
+import fr.n7.stl.tam.ast.impl.*;
+import java.io.*;
 
 /* Variables partagées dans les actions de l'analyseur syntaxique. */
 parser code {:
@@ -157,8 +161,8 @@ Program ::= /* retrait miniJava
 				for(int i = elements.size()-1; i >= 0 ; i--) {
 					if (elements.get(i).checkType()) {
 						elements.get(i).allocateMemory(Register.SB, 0);
-						Fragment code = elements.get(i).getCode(new TAMFactoryImpl());
-						fragments.add(code);
+						Fragment fragment = elements.get(i).getCode(new TAMFactoryImpl());
+						fragments.add(fragment);
 					} else {
 						check_type = false;
 						break;
@@ -289,7 +293,7 @@ ClassElement ::=
 Attribute ::=
 		AccessRight:visibility Type:type Identifiant:identifiant UL_Point_Virgule
 		{:
-          RESULT = newAttribut(visibility , State.Rien, type, identifiant);
+          RESULT = new Attribut(visibility , State.None, type, identifiant);
 		:}
 		|
 		AccessRight:visibility UL_De_Classe Type:type Identifiant:identifiant UL_Egal Expression:valeur UL_Point_Virgule
@@ -306,7 +310,7 @@ Attribute ::=
 Method ::=
 		AccessRight:visibility Signature:entete Block:corps
 		{:
-         RESULT = new Methode(visibility, State.Rien, entete, corps);
+         RESULT = new Methode(visibility, State.None, entete, corps);
 		:}
 		| 
 		AccessRight:visibility UL_Definitif Signature:entete Block:corps
@@ -323,10 +327,10 @@ Method ::=
 		{:
           RESULT = new Methode(visibility, State.StaticFinal, entete, corps);
 		:}
-		| 
+		/*| 
 		AccessRight:visibility UL_Abstrait Signature:entete UL_Point_Virgule
 		{:
-		:}
+		:} */
 		;
 		
 Signature ::=

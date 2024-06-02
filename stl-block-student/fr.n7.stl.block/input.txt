@@ -1,16 +1,19 @@
-test_func {
+class Main {
 
-    int a = 1;
-    int b = 2;
+	private int a;
+	public static final int b = 1;
 
-    int add(int x, int y) {
-        return x + y;
-    }
-
-    int c = 3;
-    int d = 4;
-
-    int e = add(a, b);
-    print e;
-
+	public final void m() {
+	}
+	
+	protected int m(int i) {
+	}
+	
+	public A() {
+		this(0);
+	}
+	
+	private A(int _a) {
+		this.a = _a;
+	}
 }
