@@ -1,10 +1,6 @@
-final class A {
+class A {
 	
-	public A() {
-		print 1;
-	}
-	
-	public final int get() {
+	public final void get() {
 		print 1;
 	}
 }
@@ -12,6 +8,7 @@ final class A {
 public class Main {
 
 	public static void main(String args[]) {
-		print 1;
+		A a = new A();
+		a.get();
     }
 }

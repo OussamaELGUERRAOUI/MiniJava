@@ -44,7 +44,9 @@ public class ConstructorDeclaration implements ClassElement {
                 }
             }
         }
-        return _result + ") " + corps;
+        if ( corps != null) {
+        	return _result + ") " + corps;
+        } else {return _result + ") {}\n";}
     }
 
     public List<ParameterDeclaration> getParameters() {

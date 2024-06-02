@@ -5,7 +5,7 @@ class Driver {
 	public static void main(String[] args) throws Exception {
 		Parser parser = null;
 		if (args.length == 0) {
-			parser = new Parser( "test2/input.txt" );
+			parser = new Parser( "test2/test05-final.java" );
 			parser.parse();
 		} else {
 			for (String name : args) {
