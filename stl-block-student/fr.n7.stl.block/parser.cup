@@ -14,7 +14,6 @@ import java.util.*;
 // Elements du métamodèle pour la construction de l'arbre abstrait
 import fr.n7.stl.block.ast.*;
 import fr.n7.stl.block.ast.classContent.*;
-import fr.n7.stl.block.ast.classes.*;
 import fr.n7.stl.block.ast.expression.*;
 import fr.n7.stl.block.ast.expression.accessible.*;
 import fr.n7.stl.block.ast.expression.allocation.*;
@@ -26,7 +25,6 @@ import fr.n7.stl.block.ast.scope.*;
 import fr.n7.stl.block.ast.type.*;
 import fr.n7.stl.block.ast.type.declaration.*;
 import fr.n7.stl.util.*;
-
 
 /* Variables partagées dans les actions de l'analyseur syntaxique. */
 parser code {:
@@ -79,7 +77,6 @@ terminal			UL_Type_Booleen, UL_Type_Caractere, UL_Type_Chaine, UL_Type_Entier, U
 terminal String		UL_Identificateur, UL_Chaine, UL_Caractere;
 terminal String		UL_Nombre_Entier, UL_Nombre_Flottant, UL_Nul, UL_Vrai, UL_Faux; // Valeur transmise par l'analyseur lexical
 
-
 /* Non terminaux avec type renvoyé par actions sémantiques (RESULT = ...) */
 non terminal Block						Program;
 /* début modification miniJava */
@@ -100,13 +97,13 @@ non terminal Expression 				Expression;
 non terminal AssignableExpression		Affectable;
 /* miniJava */
 non terminal							Elements, Main, Class ;
-
 non terminal							SingleInherits ;
-non terminal Instance					Instance;
 non terminal							ClassElements ;
 non terminal							ClassElement ;
 non terminal							 Attribute, Signature, Method, Constructor, ConstructorPrelude;
-non terminal							AccessRight, ElementNature;
+non terminal							ElementNature;
+non terminal AccessRight				AccessRight;
+non terminal  			                Instance;
 
 /* Associativité et Priorité relative des opérateurs (du moins prioritaire au plus prioritaire) */
 /* Opérateur le moins prioritiaire */
@@ -141,71 +138,98 @@ Program ::= /* retrait miniJava
 			Block:block
 			retrait miniJava */
 			{: 
-               
-                System.out.println( block );
-
-
-
-                
-                
-				/* retrait miniJava
-				System.out.println( "Block named : " + nom );
-				System.out.println( block ); 
-				SymbolTable tds = new SymbolTable();
-				if (block.collect(tds)) {
-					System.out.println("Collect succeeded : " + tds);
-					if (block.resolve(tds)) {
-						System.out.println("Resolve succeeded.");
-					} else {
-						System.out.println("Resolve failed." + tds);
-					}
-				} else {
-					System.out.println("Collect failed : " + tds);
+				boolean check_collect = true;
+				boolean check_resolve = true;
+				boolean check_type = true;
+				List<Fragment> fragments = new ArrayList<>();
+				Fragment code = (new TAMFactoryImpl()).createFragment();
+				for (int i = elements.size()-1; i>=0; i--) {
+					System.out.println(elements.get(i));
 				}
-				retrait miniJava */
+				SymbolTable tds = new SymbolTable();
+				for(int i = elements.size()-1; i>=0; i--) {
+                    check_collect = check_collect && elements.get(i).collect(tds);
+                    check_resolve = check_resolve && elements.get(i).resolve(tds);
+                    
+				}
+				for(int i = elements.size()-1; i >= 0 ; i--) {
+					if (elements.get(i).checkType()) {
+						elements.get(i).allocateMemory(Register.SB, 0);
+						Fragment code = elements.get(i).getCode(new TAMFactoryImpl());
+						fragments.add(code);
+					} else {
+						check_type = false;
+						break;
+					}
+				}
+
+				if (check_collect) {
+					System.out.println("\nCollect succeeded" + tds);
+				} else {
+					System.out.println("\nCollect failed" + tds);
+				}
+
+				if (check_resolve) {
+					System.out.println("Resolve succeeded" + tds);
+				} else {
+					System.out.println("Resolve failed" + tds);
+				}
+
+				if (check_type) {
+					System.out.println("Check type succeeded\n");
+				} else {
+					System.out.println("Check type failed\n");
+				}
+
+				for(int i = fragments.size()-1; i>=0; i--) {
+					complet.append(list_fragments.get(i));
+				}
+
+				System.out.println("Generated code : ");
+				System.out.println(code);
+				
+				File file = new File(parser.name.replaceAll(".txt", "") + ".tam");
+				PrintStream printer = null;
+				try {
+					printer = new PrintStream( new FileOutputStream(file) );
+					printer.println(code);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			:}
+		
 		;
 
 /* ajout miniJava : classes, attributs, méthodes, constructeurs, etc */
-Elements ::= Main : m Elements:elements 
+Elements ::= Main : main
 		{:
-          
-          elements.add(m);
-          RESULT = elements;
+          elements.add(main);
+		  RESULT = elements;
 		:}
-		| Class:c  
-		   
+		 List<Element> elements = new LinkedList<>();
+		| Class : classe Elements : elements
 		{:
-           List<Element> elements = new LinkedList<>();
-           elements.add(c);
-		   RESULT = elements;
-          
+          elements.add(classe);
+          RESULT = elements;
 		:}
 		| UL_Abstrait Class Elements
 		{:
 		:}
-		| UL_Definitif Class Elements
-		{:
-		:}
 		;
 		
-Class ::= UL_Classe UL_Identificateur: name SingleInherits 
-		UL_Accolade_Ouvrante ClassElements: classElements UL_Accolade_Fermante
+Class ::= UL_Classe UL_Identificateur SingleInherits 
+		UL_Accolade_Ouvrante ClassElements UL_Accolade_Fermante
 		{:
-          RESULT = new NormalClass(name, classElements);
 		:}
 		;
 		
 Main ::= UL_Public UL_Classe UL_Classe_Principale
 		UL_Accolade_Ouvrante 
 			UL_Public UL_De_Classe UL_Type_Vide UL_Methode_Principale 
-			UL_Parenthese_Ouvrante Parameters: parameters UL_Parenthese_Fermante Block: block UL_Accolade_Fermante
+			UL_Parenthese_Ouvrante Parameters UL_Parenthese_Fermante Block UL_Accolade_Fermante
 		{:
-          RESULT = new Main(parameters, block);
 		:}
 		;
-		
-
 		
 SingleInherits ::= /* Lambda */
 		{:
@@ -216,39 +240,25 @@ SingleInherits ::= /* Lambda */
 		:}
 		;
 		
-Instance ::= UL_Identificateur:nom
-		{:
-			RESULT = new ObjectDecl(nom.getLeft());
-		:}
-		;
-		
 ClassElements ::= /* Lambda */
 		{:
-			List<ClassElement> classElements = new LinkedList<>();
-			RESULT = classElements;
 		:}
-		| ClassElement:element ClassElements:classElements
+		| AccessRight ClassElement ClassElements
 		{:
-			classElements.add(element);
-			RESULT = classElements;
 		:}
 		;
-		
 
-		
-		
-AccessRight ::=
-		UL_Public
+AccessRight ::= UL_Public
 		{:
-          RESULT = AccessRight.Public;
+			RESULT = AccessRight.Public;
 		:}
 		| UL_Protege
 		{:
-          RESULT = AccessRight.Protected;
+			RESULT = AccessRight.Protected;
 		:}
 		| UL_Prive
 		{:
-          RESULT = AccessRight.Private;
+			RESULT = AccessRight.Private;
 		:}
 		;
 		
@@ -262,99 +272,84 @@ ElementNature ::=
 		;		
 		
 ClassElement ::=
-		Attribute : attribute
+		Attribute
 		{:
-          RESULT = attribute;
 		:}
 		|
-		Method : methode
+		Method
 		{:
-          RESULT = methode ;
 		:}
 		|
-		Constructor : constructeur
-		
+		Constructor
 		{:
-          RESULT = constructeur;
-         
 		:}
 		;
 		
 Attribute ::=
-		AccessRight: visibility Type:type Identifiant:identifiant UL_Point_Virgule
+		AccessRight:visibility Type:type Identifiant:identifiant UL_Point_Virgule
 		{:
-
-		   RESULT = new Attribut(visibility, State.None,type ,identifiant);
-           
+          RESULT = newAttribut(visibility , State.Rien, type, identifiant);
 		:}
 		|
-		AccessRight: visibility  UL_De_Classe Type:type Identifiant:identifiant UL_Egal Expression:valeur UL_Point_Virgule
+		AccessRight:visibility UL_De_Classe Type:type Identifiant:identifiant UL_Egal Expression:valeur UL_Point_Virgule
 		{:
-
-		   RESULT = new Attribut(visibility, State.Static, type ,identifiant, valeur);
-
+          RESULT = new Attribut(visibility, State.Static, type, identifiant, valeur);
 		:}
 		|
-		AccessRight: visibility  UL_De_Classe UL_Definitif Type:type Identifiant:identifiant UL_Egal Expression:valeur UL_Point_Virgule
+		AccessRight:visibility UL_De_Classe UL_Definitif Type:type Identifiant:identifiant UL_Egal Expression:valeur UL_Point_Virgule
 		{:
-		
-		   RESULT = new Attribut(visibility, State.StaticFinal, type, identifiant, valeur);
-		
+          RESULT = new Attribut(visibility, State.StaticFinal, type, identifiant, valeur);
 		:}
-
 		;
 		
 Method ::=
-		 AccessRight:visibility  Signature:entete Block:corps
+		AccessRight:visibility Signature:entete Block:corps
 		{:
-          RESULT = new Methode(visibility, State.None, entete, corps); 
+         RESULT = new Methode(visibility, State.Rien, entete, corps);
 		:}
 		| 
-		AccessRight:visibility  UL_Definitif Signature:entete Block:corps
-		
+		AccessRight:visibility UL_Definitif Signature:entete Block:corps
 		{:
-          RESULT = new Methode(visibility, State.Final, entete, corps); 
+         RESULT = new Methode(visibility, State.Final, entete, corps);
 		:}
 		| 
 		AccessRight:visibility UL_De_Classe Signature:entete Block:corps
 		{:
-          RESULT = new Methode(visibility, State.Static, entete, corps); 
+         RESULT = new Methode(visibility, State.Static, entete, corps);
 		:}
 		| 
 		AccessRight:visibility UL_De_Classe UL_Definitif Signature:entete Block:corps
-		 
 		{:
-          RESULT = new Methode(visibility, State.StaticFinal, entete, corps); 
+          RESULT = new Methode(visibility, State.StaticFinal, entete, corps);
 		:}
 		| 
-		 AccessRight:visibility UL_Abstrait Signature:entete UL_Point_Virgule
+		AccessRight:visibility UL_Abstrait Signature:entete UL_Point_Virgule
 		{:
-         RESULT = new Methode(visibility, State.StaticFinal, entete); 
 		:}
 		;
 		
 Signature ::=
 		Type:type Identifiant:identifiant UL_Parenthese_Ouvrante Parameters:parametres UL_Parenthese_Fermante
 		{:
-          RESULT = new Signature(identifiant, type, parameters);
+          RESULT = new Signature(identifiant ,type, parametres);
 		:}
 		|
 		Type:type Identifiant:identifiant UL_Parenthese_Ouvrante UL_Parenthese_Fermante
 		{:
-          RESULT = new Signature(identifiant, type);
+          RESULT = new Signature(identifiant ,type);
 		:}
 		;
 		
 Constructor ::=
-		UL_Identificateur:nom UL_Parenthese_Ouvrante Parameters:parametres UL_Parenthese_Fermante Block : body
+		 UL_Identificateur:nom UL_Parenthese_Ouvrante Parameters:parametres UL_Parenthese_Fermante Block: corps
 		{:
-         public Constructeur(name,parameters, body)
-		:}/*
+          RESULT = new Constructeur(nom, parametres,corps );
+		:}
 		|
-		UL_Identificateur:nom UL_Parenthese_Ouvrante UL_Parenthese_Fermante Block:body
+		 UL_Identificateur:nom UL_Parenthese_Ouvrante UL_Parenthese_Fermante Block : corps
 		{:
-         public Constructeur(name, body)
-		:}*/
+          RESULT = new Constructeur(nom, corps);
+		:}
 		;
 
 /* fin ajout miniJava */

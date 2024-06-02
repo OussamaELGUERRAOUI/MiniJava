@@ -24,7 +24,7 @@ public class Main implements ClasseInterface {
     }
 
     public String toString() {
-        String res = "Class Main {\n";
+        String res = "public Class Main {\n";
         res += "public static void main(";
         for (ParameterDeclaration p : this.parameters) {
             res += p.toString() + ", ";

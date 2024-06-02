@@ -2,6 +2,8 @@ package fr.n7.stl.block.ast.classContent;
 
 import fr.n7.stl.block.ast.scope.Declaration;
 import fr.n7.stl.block.ast.scope.HierarchicalScope;
+import fr.n7.stl.block.ast.type.PartialType;
+import fr.n7.stl.util.Pair;
 
 import java.util.List;
 
@@ -10,18 +12,24 @@ import fr.n7.stl.block.ast.type.Type;
 
 public class Signature implements Declaration {
 
-    private String name;
+    private Pair<String,PartialType> name;
     private Type type;
     private List<ParameterDeclaration> parameters;
 
-    public Signature(String _name, Type _type, List<ParameterDeclaration> _parameters) {
+    public Signature(Pair<String,PartialType> _name, Type _type, List<ParameterDeclaration> _parameters) {
         this.name = _name;
         this.type = _type;
         this.parameters = _parameters;
     }
+    
+    public Signature(Pair<String,PartialType> _name, Type _type) {
+        this.name = _name;
+        this.type = _type;
+        this.parameters = null;
+    }
 
     public String toString() {
-        String res = this.type.toString() + " " + this.name + "(";
+        String res = this.type.toString() + " " + this.name.getLeft() + "(";
         for (ParameterDeclaration p : this.parameters) {
             res += p.toString() + ", ";
         }
@@ -34,7 +42,7 @@ public class Signature implements Declaration {
 
     @Override
     public String getName() {
-        return this.name;
+        return this.name.getLeft();
     }
 
     @Override

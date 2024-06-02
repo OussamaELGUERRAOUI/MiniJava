@@ -11,11 +11,19 @@ import fr.n7.stl.block.ast.scope.SymbolTable;
 import fr.n7.stl.util.Logger;
 
 public class ObjectDecl implements Type, Scope<ContentInterface>  {
-    NormalClass classe;
+    String name;
+	NormalClass classe;
 
-    public ObjectDecl(NormalClass _classe) {
-        this.classe = _classe;
+    public ObjectDecl(String name ,NormalClass _classe) {
+    	this.name= name;
+    	this.classe = _classe;
     }
+    
+    public ObjectDecl(String name) {
+    	this.name= name;
+    	this.classe = null;
+    }
+
 
     public String toString() {
         return "new " + this.classe.getName() + "()";

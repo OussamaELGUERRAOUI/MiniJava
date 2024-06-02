@@ -91,7 +91,7 @@ public class ConstructorAllocation implements Expression {
     public Fragment getCode(TAMFactory _factory) {
         Fragment res = _factory.createFragment();
         res.add(_factory.createLoadL(1));
-        res.add(TAMFactory.createMalloc());
+        //res.add(TAMFactory.createMalloc());
         if (this.arguments != null) {
             for (Expression _parameter : this.arguments) {
                 res.append(_parameter.getCode(_factory));

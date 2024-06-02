@@ -33,9 +33,14 @@ public class Constructeur implements ContentInterface {
         this.parameters = _parameters;
         this.body = _body;
     }
+    public Constructeur(String _name, Block _body) {
+        this.name = _name;
+        this.parameters = null;
+        this.body = _body;
+    }
 
     public String toString() {
-        String res = this.name + "(";
+        String res = "public " + this.name + "(";
         for (ParameterDeclaration p : this.parameters) {
             res += p.toString() + ", ";
         }

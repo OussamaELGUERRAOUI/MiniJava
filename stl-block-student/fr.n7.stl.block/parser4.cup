@@ -222,7 +222,7 @@ Program ::= Elements:elements
 /* ajout miniJava : classes, interfaces, attributs, méthodes, constructeurs, etc */
 Elements ::= Main:main
 		{:
-			List<Element> elements = new LinkedList<>();
+			
 			elements.add(main);
 			RESULT = elements;
 		:}
@@ -231,6 +231,7 @@ Elements ::= Main:main
 			elements.add(i);
 			RESULT = elements;
 		:}
+		  List<Element> elements = new LinkedList<>();
 		| Class:c Elements:elements
 		{:
 			elements.add(c);
@@ -243,6 +244,8 @@ Elements ::= Main:main
 		{:
 		:}
 		;
+		
+		
 		
 Interface ::= UL_Interface UL_Identificateur Generics MultipleInherits 
 		UL_Accolade_Ouvrante InterfaceElements UL_Accolade_Fermante

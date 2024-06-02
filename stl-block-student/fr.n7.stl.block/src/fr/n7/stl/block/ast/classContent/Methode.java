@@ -1,5 +1,6 @@
 package fr.n7.stl.block.ast.classContent;
 
+import fr.n7.stl.block.ast.expression.Expression;
 import fr.n7.stl.block.ast.instruction.declaration.ParameterDeclaration;
 import fr.n7.stl.block.ast.Block;
 import fr.n7.stl.block.ast.scope.Declaration;
@@ -30,6 +31,9 @@ public class Methode implements ContentInterface {
     public String toString() {
         return this.visibility.toString() + " " + this.state.toString() + " " + this.signature + " " + this.body;
     }
+   public AccessRight getVisibility() {
+	   return this.visibility;
+   }
 
     public String getName() {
         return this.signature.getName();
@@ -37,10 +41,6 @@ public class Methode implements ContentInterface {
 
     public Type getType() {
         return this.signature.getType();
-    }
-
-    public AccessRight getVisibility() {
-        return this.visibility;
     }
 
     public boolean collectAndBackwardResolve(HierarchicalScope<Declaration> _scope) {

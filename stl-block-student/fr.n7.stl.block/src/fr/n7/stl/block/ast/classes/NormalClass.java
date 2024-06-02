@@ -41,7 +41,7 @@ public class NormalClass implements ClasseInterface, Declaration {
     }
 
     public Type getType() {
-        return new ObjectDecl(this);
+        return new ObjectDecl(name, this);
     }
 
     public List<Attribut> getAttributs() {

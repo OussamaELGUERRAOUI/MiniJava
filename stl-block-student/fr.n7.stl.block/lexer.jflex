@@ -143,7 +143,9 @@ Identificateur = ([:jletter:] | "_" ) ([:jletterdigit:] | [:jletter:] | "_" )*
   "this"			{ return symbolFactory.newSymbol("Moi", UL_Moi); }
   "super"			{ return symbolFactory.newSymbol("Super", UL_Super); }
   "Main"			{ return symbolFactory.newSymbol("Classe Principale", UL_Classe_Principale); }
-  "main"			{ return symbolFactory.newSymbol("Méthode Principale", UL_Methode_Principale); }
+  "main"			{ return symbolFactory.newSymbol("Méthode Principale", UL_Methode_Principale);
+  "abstract"			{ return symbolFactory.newSymbol("Abstrait", UL_Abstrait); }
+   }
   /* fin ajout miniJava */
   {Caractere}		{ return symbolFactory.newSymbol("Caractère", UL_Caractere, yytext()); }
   {Chaine}			{ return symbolFactory.newSymbol("Chaine de caractères", UL_Chaine, yytext()); }

@@ -39,6 +39,16 @@ public class Attribut implements ContentInterface {
         this.type = _type;
         this.value = null;
     }
+    
+    public Attribut(AccessRight _visibility ,Type _type, String _name) {
+        this.visibility = _visibility;
+        this.state = null;
+        this.name = _name;
+        this.type = _type;
+        this.value = null;
+    }
+    
+    
 
     public String toString() {
         return this.visibility.toString() + " " + this.state.toString() + " " + this.type + " " + this.name + (this.value != null ? " = " + this.value : "") + ";";
